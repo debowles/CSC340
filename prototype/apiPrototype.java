@@ -18,12 +18,18 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/*
+ * DJ Bowles
+ * API prototype
+ */
 public class apiPrototype {
 
+    //main class calls get request for API
     public static void main(String[] args) throws IOException {
         apiGetPrototype();
     }
 
+    //getToken aquires the berar authentication token 
     public static String getToken() {
         HttpClient httpclient = new DefaultHttpClient();
         HttpPost httppost = new HttpPost("https://api.petfinder.com/v2/oauth2/token");
@@ -32,17 +38,17 @@ public class apiPrototype {
         String clientSecret = "lWNEFV2h9b4QU6fqkBZV1rqtfoMC7jVPWnwsUgeg";
 
         try {
+            
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
             nameValuePairs.add(new BasicNameValuePair("grant_type", "client_credentials"));
-            //nameValuePairs.add(new BasicNameValuePair("username", username));
-            //nameValuePairs.add(new BasicNameValuePair("password", password));
             nameValuePairs.add(new BasicNameValuePair("client_id", clientID));
             nameValuePairs.add(new BasicNameValuePair("client_secret", clientSecret));
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
-            // Execute HTTP Post Request
+            //HTTP Post Request
             HttpResponse response = httpclient.execute(httppost);
 
+            //JSON to string
             JSONObject json_auth = new JSONObject(EntityUtils.toString(response.getEntity()));
             token = json_auth.getString("access_token");
             System.out.println(token);
@@ -55,29 +61,29 @@ public class apiPrototype {
         }
         return token;
     }
+    
+    //calls get request from prototype and puts authorizationtoken on teh Http Header.
+    public static void apiGetPrototype() throws IOException {//String token, String catagory, String action) throws IOException {
 
-        public static void apiGetPrototype() throws IOException {//String token, String catagory, String action) throws IOException {
-        
-        String token = getToken();    
+        String token = getToken();
         URL url = new URL("https://api.petfinder.com/v2/animals?type=dog&page=2");
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-        conn.setRequestProperty("Authorization","Bearer "+ token);
-        conn.setRequestProperty("Content-Type","application/json");
-        conn.setRequestMethod("GET");
+        connection.setRequestProperty("Authorization", "Bearer " + token);
+        connection.setRequestProperty("Content-Type", "application/json");
+        connection.setRequestMethod("GET");
 
-
-        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         String output;
 
-        StringBuffer response = new StringBuffer();
+        StringBuffer apiResponse = new StringBuffer();
         while ((output = in.readLine()) != null) {
-            response.append(output);
+            apiResponse.append(output);
         }
 
         in.close();
         // printing result from response
-        System.out.println("Response:-" + response.toString());
+        System.out.println(apiResponse.toString());
 
     }
 }
