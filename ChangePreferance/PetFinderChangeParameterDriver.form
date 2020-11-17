@@ -187,7 +187,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="label1" min="-2" pref="38" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="55" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="textField1" max="32767" attributes="0"/>
                           <Component id="jLabel1" min="-2" pref="20" max="-2" attributes="0"/>
@@ -217,7 +217,6 @@
                   <Component id="save" min="-2" pref="36" max="-2" attributes="0"/>
                   <Component id="button2" min="-2" pref="36" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
