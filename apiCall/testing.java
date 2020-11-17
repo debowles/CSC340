@@ -3,21 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package apiCall;
-import apiCall.PetFinderAPI;
+package CSC340.apiCall;
+import CSC340.DB.DBPetFinderParcer;
+import CSC340.APIParcer.PetFinderParcerTester;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.HashMap;
 /**
  *
- * @author biscu
+ * @author David Bowles
  */
-public class testing extends PetFinderAPI{
-    public static void main(String []args) throws IOException{
-        ApiUrl url = new ApiUrl("https://api.petfinder.com/v2/animals");
-        url.addParameter("location", "27403");
-        System.out.println(url.toString());
-       url.changeValue("location", "27403", "28428");
-        System.out.println(url.toString());
-        String s = apiCall(url);
-        System.out.println(s);
+public class testing{
+    public static void main(String []args) throws IOException, SQLException{
+        HashMap<String, String> mapFileContents = new HashMap<String, String>();
+        
+        
+        
+        
+        PetFinderAPI url = new PetFinderAPI("https://api.petfinder.com/v2/animals?");
+               
+        String a = "https://api.petfinder.com/v2/animals?"+DBPetFinderParcer.getParameters();
+        PetFinderAPI url2 = new PetFinderAPI(a);
+        System.out.println(url2.toString());
+        String s1 = url2.loadAPI(url);  
     }
 }
+

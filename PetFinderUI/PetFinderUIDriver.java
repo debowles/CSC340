@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PetFinderUI;
+package CSC340.PetFinderUI;
 
 import javax.swing.JFrame;
 
