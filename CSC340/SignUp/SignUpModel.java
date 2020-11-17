@@ -60,7 +60,7 @@ public class SignUpModel {
             
             
             //In future patch you will NOT need to add ID, this is only temporary
-            map.put("ID", "1"); 
+            
             
             addUserInfoDB(map);
             

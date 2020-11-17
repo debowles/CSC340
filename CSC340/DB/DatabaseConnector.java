@@ -136,13 +136,12 @@ public class DatabaseConnector implements DBConnectorInterface{
                 statementLabels = statementLabels + ",ANIMALTYPE";
                 statementValues = statementValues + "," +"'"+ map.get("ANIMALTYPE") + "'";
             }
-            if(map.containsKey("ID")){
                 statementLabels = statementLabels + ",ID"; 
-                statementValues = statementValues + ","+map.get("ID");
-            }
+                statementValues = statementValues + ","+ createID();
             
             
-
+            
+            
             System.out.println(statementLabels);
             System.out.println(statementValues);
 
@@ -153,5 +152,41 @@ public class DatabaseConnector implements DBConnectorInterface{
             System.out.println("DB info added");
 
         }
+        
+        
+        
     }
+    public static String createID() throws SQLException{
+        int i = 0;
+        try (Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/logindb", "root", "root")) {
+            Statement stmt = con.createStatement();
+            ResultSet results = stmt.executeQuery("SELECT * FROM USERSIGNUP");
+             
+            while(results.next()){
+                 i++;
+             }            
+            results.close();
+            stmt.close();
+        }  
+        String num =String.valueOf(i);
+            return num;
+            }
+    
+    public static boolean checkForValue(String parameter, String value) throws SQLException{
+        try (Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/logindb", "root", "root")) {
+            Statement stmt = con.createStatement();
+            ResultSet results = stmt.executeQuery("SELECT "+parameter+" FROM USERSIGNUP");
+             
+            while(results.next()){
+                if(results.getString(parameter).equals(value)){
+                    return true;
+             }            
+            
+        }  
+        results.close();
+        stmt.close();
+            return false;
+            }
+    }
+    
 }

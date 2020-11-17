@@ -16,9 +16,6 @@ import java.util.HashMap;
  */
 public class DBTester {
     public static void main(String[] args) throws SQLException{
-        //System.out.println(getUserParameters(5));
-        //HashMap<String,String> map = readUserInfoDB(1);
-        
         HashMap<String,String> map = new HashMap<String,String>();
             map.put("FIRST_NAME", "David");
             map.put("LAST_NAME", "Bowles");
@@ -27,20 +24,11 @@ public class DBTester {
             map.put("PASSWORD", "Rascal123");
             map.put("ZIPCODE", "28428");
             map.put("RADIUS", "100");
-            map.put("ANIMALTYPE", "Dog");
-            map.put("ID", "1");  
-            addUserInfoDB(map);
-        
-        
-        
-        
-        
-        System.out.println(map.toString());
-        
-        
-        
+            map.put("ANIMALTYPE", "Dog"); 
+            addUserInfoDB(map);                                       
+        System.out.println(map.toString());                       
         addUserInfoDB(map);
-        
+        System.out.println(checkForValue("Email", "debowles@uncg.edu"));
         //updateUserInfoDB("FIRST_NAME", "David", "1");
         
         deleteUserInfoDB("2");
