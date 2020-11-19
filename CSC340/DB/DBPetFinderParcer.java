@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 /**
  *
- * @author biscu
+ * @author David Bowles
  */
 public class DBPetFinderParcer {
 

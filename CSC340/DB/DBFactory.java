@@ -15,49 +15,49 @@ import java.util.Map;
 
 /**
  *
- * @author biscu
+ * @author David Bowles
  */
 public class DBFactory {
 
-    //Reads the Labels from a specific user in teh database
+    //Reads the Labels from a specific user in the database
     
     public static String getUserFirst_Name(int rowNum) throws SQLException {
-        String s = DatabaseConnector.readUserParameters("FIRST_NAME", rowNum);
+        String s = SignUpDatabaseConnector.readUserParameters("FIRST_NAME", rowNum);
         return s;
     }
 
     public static String getUserAnimalType(int rowNum) throws SQLException {
-        String s = DatabaseConnector.readUserParameters("ANIMALTYPE", rowNum);
+        String s = SignUpDatabaseConnector.readUserParameters("ANIMALTYPE", rowNum);
         return s;
     }
 
     public static String getUserZipCode(int rowNum) throws SQLException {
-        String s = DatabaseConnector.readUserParameters("ZIPCODE", rowNum);
+        String s = SignUpDatabaseConnector.readUserParameters("ZIPCODE", rowNum);
         return s;
     }
 
     public static String getUserLast_Name(int rowNum) throws SQLException {
-        String s = DatabaseConnector.readUserParameters("LAST_NAME", rowNum);
+        String s = SignUpDatabaseConnector.readUserParameters("LAST_NAME", rowNum);
         return s;
     }
 
     public static String getUserEmail(int rowNum) throws SQLException {
-        String s = DatabaseConnector.readUserParameters("EMAIL", rowNum);
+        String s = SignUpDatabaseConnector.readUserParameters("EMAIL", rowNum);
         return s;
     }
 
     public static String getUserPhonenumber(int rowNum) throws SQLException {
-        String s = DatabaseConnector.readUserParameters("PHONENUMBER", rowNum);
+        String s = SignUpDatabaseConnector.readUserParameters("PHONENUMBER", rowNum);
         return s;
     }
 
     public static String getUserPassword(int rowNum) throws SQLException {
-        String s = DatabaseConnector.readUserParameters("PASSWORD", rowNum);
+        String s = SignUpDatabaseConnector.readUserParameters("PASSWORD", rowNum);
         return s;
     }
 
     public static String getUserRadius(int rowNum) throws SQLException {
-        String s = DatabaseConnector.readUserParameters("RADIUS", rowNum);
+        String s = SignUpDatabaseConnector.readUserParameters("RADIUS", rowNum);
         return s;
     }
 

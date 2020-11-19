@@ -7,8 +7,9 @@ package CSC340.SignUp;
 * Last updated: 11/10/2020
 * Author: Yngrid Corrales
  */
-import CSC340.DB.DatabaseConnector;
-import static CSC340.DB.DatabaseConnector.addUserInfoDB;
+import CSC340.DB.DBConnector;
+import CSC340.DB.SignUpDatabaseConnector;
+import static CSC340.DB.SignUpDatabaseConnector.addUserInfoDB;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,7 +24,7 @@ import java.util.regex.Pattern;
 public class SignUpModel {
 
     /* Establishing connection to DatabaseConnector class*/
-    Connection con = DatabaseConnector.connectdb();
+    Connection con = DBConnector.connectdb();
     PreparedStatement ps = null;
     ResultSet result = null;
 
