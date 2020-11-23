@@ -5,7 +5,8 @@ package CSC340.LogIn;
 * Last updated: 11/10/2020
 * Author: Yngrid Corrales
  */
-import CSC340.DB.DatabaseConnector;
+import CSC340.DB.DBConnector;
+import CSC340.DB.SignUpDatabaseConnector;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +16,7 @@ import javax.swing.JOptionPane;
 
 public class LoginModel{
     /* Establishing connection to DatabaseConnector class*/
-    Connection con = DatabaseConnector.connectdb();
+    Connection con = DBConnector.connectdb();
     PreparedStatement ps = null;
     ResultSet result = null;
 

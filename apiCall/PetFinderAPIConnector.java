@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package CSC340.apiCall;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -28,22 +29,19 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+
 /**
  *
  * @author David Bowles
  */
-public class PetFinderAPIConnector implements PetFinderAPIConnectorface{
-          
-    
-    //grabs token for OAuth2.0
+public class PetFinderAPIConnector implements PetFinderAPIConnectorface {
 
+    //grabs token for OAuth2.0
     /**
      *
      * @return token
      */
-    
-    @Override
-    public String getToken() {
+    public static String getToken() {
         HttpClient httpclient = new DefaultHttpClient();
         HttpPost httppost = new HttpPost("https://api.petfinder.com/v2/oauth2/token");
         String token = "";
@@ -51,7 +49,7 @@ public class PetFinderAPIConnector implements PetFinderAPIConnectorface{
         String clientSecret = "lWNEFV2h9b4QU6fqkBZV1rqtfoMC7jVPWnwsUgeg";
 
         try {
-            
+
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
             nameValuePairs.add(new BasicNameValuePair("grant_type", "client_credentials"));
             nameValuePairs.add(new BasicNameValuePair("client_id", clientID));
@@ -74,50 +72,86 @@ public class PetFinderAPIConnector implements PetFinderAPIConnectorface{
         }
         return token;
     }
-    
-    
-    
-    
-    //calls the api then returns it as a string
 
+    //calls the api then returns it as a string
     /**
      *
      * @param apiUrl
      * @return
      * @throws IOException
+     * @throws org.json.JSONException
      */
-    @Override
-     public String apiCall(PetFinderAPI apiUrl)throws IOException, JSONException{
-        String urlString = apiUrl.getApiUrl();               
+    public static ArrayList<String> mapApiCall(HashMap<String, String> map) throws IOException, JSONException {
         String token = getToken();
+        ArrayList<String> list = new ArrayList<String>();
+        String url = "";
+        String animal = "";
+        if (map.containsKey("Dog_URL")) {
+            url = "https://api.petfinder.com/v2/animals?" + map.get("Dog_URL");
+            animal = apiCall(token, url);            
+            list.add(animal);            
+        }
+        if (map.containsKey("Cat_URL")) {
+            url = "https://api.petfinder.com/v2/animals?" + map.get("Cat_URL");
+            animal = apiCall(token, url);
+            list.add(animal);
+        }
+        if (map.containsKey("Rabbit_URL")) {
+            url = "https://api.petfinder.com/v2/animals?" + map.get("Rabbit_URL");
+            animal = apiCall(token, url);
+            list.add(animal);
+        }
+        if (map.containsKey("Bird_URL")) {
+            url = "https://api.petfinder.com/v2/animals?" + map.get("Bird_URL");
+            animal = apiCall(token, url);
+            list.add(animal);
+        }
+        if (map.containsKey("Scales_URL")) {
+            url = "https://api.petfinder.com/v2/animals?" + map.get("Scales_URL");
+            animal = apiCall(token, url);
+            list.add(animal);
+        }
+        if (map.containsKey("SmallF_URL")) {
+            url = "https://api.petfinder.com/v2/animals?" + map.get("SmallF_URL");
+            animal = apiCall(token, url);
+            list.add(animal);
+        }
+        if (map.containsKey("Horse_URL")) {
+            url = "https://api.petfinder.com/v2/animals?" + map.get("Horse_URL");
+            animal = apiCall(token, url);
+            list.add(animal);
+        }
+        if (map.containsKey("Barnyard_URL")) {
+            url = "https://api.petfinder.com/v2/animals?" + map.get("Barnyard_URL");
+            animal = apiCall(token, url);
+            list.add(animal);
+        }
+        System.out.println("List: " + list.toString());
+        return list;
+    }
+
+    public static String apiCall(String token, String urlString) throws IOException, JSONException {
+
         URL url = new URL(urlString);
-        Map<String, String> myMap = new HashMap<String, String>(); 
-        
-         HttpURLConnection connection = (HttpURLConnection) url.openConnection();              
+        Map<String, String> myMap = new HashMap<String, String>();
+
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestProperty("Authorization", "Bearer " + token);
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setRequestMethod("GET");
 
-        
-        
-        
-        
         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         String output;
 
-        
         StringBuffer apiResponse = new StringBuffer();
         while ((output = in.readLine()) != null) {
             apiResponse.append(output);
             System.out.println(apiResponse);
-        }                       
-        
+        }
+
         in.close();
         //apiResponse.
-        
-        
-        
-        
+
         return apiResponse.toString();
-     }
+    }
 }
