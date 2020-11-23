@@ -4,17 +4,19 @@
  * and open the template in the editor.
  */
 package CSC340.apiCall;
+
 import java.io.IOException;
-import java.sql.SQLException;
+import org.json.JSONException;
+
 /**
  *
  * @author David Bowles
  */
-public class testing{
-    public static void main(String []args) throws IOException, SQLException{
-     
-        
-    
-    }
+public interface PetFinderAPIConnectorface {
+    public static String getToken(){
+  return null;  
 }
-
+    public static String apiCall(String urlString)throws IOException, JSONException{
+    return null;
+}
+}
