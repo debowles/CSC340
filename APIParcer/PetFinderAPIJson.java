@@ -23,17 +23,16 @@ import org.json.JSONObject;
  * @author biscu
  */
 public class PetFinderAPIJson {
-    
-    
-    public static HashMap<String, Object> getJsonHashMap(String json) throws JSONException{
-    
-    HashMap<String, Object> map = new HashMap<String, Object>();
+
+    public static HashMap<String, Object> getJsonHashMap(String json) throws JSONException {
+
+        HashMap<String, Object> map = new HashMap<String, Object>();
         JSONObject jObject = new JSONObject(json);
         Iterator<?> keys = jObject.keys();
 
-        while( keys.hasNext() ){
+        while (keys.hasNext()) {
             try {
-                String key = (String)keys.next();
+                String key = (String) keys.next();
                 String value = jObject.getString(key);
                 map.put(key, value);
             } catch (JSONException ex) {
@@ -42,22 +41,10 @@ public class PetFinderAPIJson {
 
         }
 
-        
-        
-        
-        
-        
-        System.out.println("json : "+jObject);
-        System.out.println("map : "+map);
-     
-           
+        System.out.println("json : " + jObject);
+        System.out.println("map : " + map);
+
         return map;
     }
-    
-    
-}
-    
-    
-    
-    
 
+}

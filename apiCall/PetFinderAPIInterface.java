@@ -15,9 +15,9 @@ import org.json.JSONException;
 
   public interface PetFinderAPIInterface {
         
-    public void addParameter(String parameter, String value);
-    public void deleteParameter(String parameter, String value);
-    public void changeValue(String parameter, String value1, String value2);
-    public String loadAPI(PetFinderAPI apiUrl) throws IOException, JSONException;
+    public String addParameter(String apiUrl,String parameter, String value);
+    public String deleteParameter(String apiUrl,String parameter, String value);
+    public String changeValue(String apiUrl,String parameter, String value1, String value2);
+    public String loadAPI(String urlString) throws IOException, JSONException;
 }
 

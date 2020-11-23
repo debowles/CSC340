@@ -5,6 +5,8 @@
  */
 package CSC340.apiCall;
 
+import static CSC340.apiCall.PetFinderAPIConnector.apiCall;
+import static CSC340.apiCall.PetFinderAPIConnector.getToken;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,66 +16,43 @@ import org.json.JSONException;
  *
  * @author David Bowles
  */
-public class PetFinderAPI extends PetFinderAPIConnector implements PetFinderAPIInterface {
-
-    String apiUrl;
-
-    public PetFinderAPI(String apiUrl) {
-        this.apiUrl = apiUrl;
-    }
-
-    public String getApiUrl() {
-        return apiUrl;
-    }
-
-    public void setApiUrl(String apiUrl) {
-        this.apiUrl = apiUrl;
-    }
-
-    public String toString() {
-        String url = apiUrl.toString();
-        return url;
-    }
+public class PetFinderAPI implements PetFinderAPIInterface {
 
     //adds a parameter and value to the url
-    @Override
-    public void addParameter(String parameter, String value) {
-        String urlString = this.apiUrl;
+    public String addParameter(String apiUrl,String parameter, String value) {
+        String urlString = apiUrl;
         urlString = urlString + "&" + parameter + "=" + value;
-        this.apiUrl = urlString;
+        apiUrl = urlString;
+        return apiUrl;
     }
 
     //deletes the parameter and value out of the url
     @Override
-    public void deleteParameter(String parameter, String value) {
-        String urlString = this.apiUrl;
+    public String deleteParameter(String apiUrl,String parameter, String value) {
+        String urlString = apiUrl;
         String remove = "&" + parameter + "=" + value;
         String replace = urlString.replace(remove, "");
-        this.apiUrl = replace;
+        apiUrl = replace;
+        return apiUrl;
     }
 
     //cahnges a value for a specific parameter
     @Override
-    public void changeValue(String parameter, String value1, String value2) {
-        String urlString = this.apiUrl;
+    public String changeValue(String apiUrl, String parameter, String value1, String value2) {
+        String urlString = apiUrl;
         String replace = urlString.replace(value1, value2);
-        this.apiUrl = replace;
+        apiUrl = replace;
+        return apiUrl;
     }
 
-    public String loadAPI(PetFinderAPI apiUrl) throws IOException{
+    public String loadAPI(String apiUrl) throws IOException, JSONException{
         String s;
-        try {
-            s = apiCall(apiUrl);
-            return s;
-        } catch (JSONException ex) {
-            Logger.getLogger(PetFinderAPI.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
-        
+        s = apiCall(getToken(),apiUrl);
+        return s;   
     }
 
-    public Boolean conatinsParameter(String parameter) {
-        if (parameter.contains(this.apiUrl)) {
+    public Boolean conatinsParameter(String apiUrl, String parameter) {
+        if (parameter.contains(apiUrl)) {
             return true;
         } else {
             return false;
