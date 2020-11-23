@@ -5,9 +5,11 @@
  */
 package CSC340.DB;
 
+import CSC340.APIParcer.Animal;
 import static CSC340.DB.DBConnector.createID;
 import static CSC340.DB.SignUpDatabaseConnector.getID;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -27,9 +29,7 @@ public class DBController {
     
     public static String getIDController(String username) throws SQLException{
         System.out.println("getIDController");
-        return getID("EMAIL",username);
-        
-        
+        return getID("EMAIL",username);                
     }
     
     public static HashMap<String, String> getAllDBInfo(String id) throws SQLException{
@@ -38,4 +38,11 @@ public class DBController {
         map.putAll(propertiesMap);
         return map;
     }
+    
+    public static ArrayList<Animal> getFavoritesList(String id){
+        ArrayList<Animal> list = readUserInfoDB(id);
+        return list;
+    }
+    
+    
 }
