@@ -16,10 +16,10 @@ import java.util.HashMap;
  * @author biscu
  */
 public class DBtoAPIController {
-    public static HashMap<String,String> DBtoAPI(String id) throws SQLException{       
+    public static String DBtoAPI(String id) throws SQLException{       
         HashMap<String,String> properties;
         properties = getAllDBInfo(id);
-        HashMap<String,String> apiParameters; 
+        String apiParameters; 
         apiParameters = animalPropertiesParced(properties);
         
         return apiParameters;

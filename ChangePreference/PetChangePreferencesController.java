@@ -78,7 +78,7 @@ public class PetChangePreferencesController {
         return id;
     }
     
-    //TODO: Go to homepage
+    
     class cancelListener implements ActionListener {
 
         @Override
@@ -90,7 +90,7 @@ public class PetChangePreferencesController {
         }
     }
 
-    //TODO: Go to homepage
+    
     class saveListener implements ActionListener {
     @Override
         public void actionPerformed(ActionEvent e) {

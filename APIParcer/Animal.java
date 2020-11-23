@@ -5,6 +5,7 @@
  */
 package CSC340.APIParcer;
 
+import static CSC340.apiCall.PetFinderAPIConnector.apiCall;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -33,8 +34,9 @@ public class Animal extends PetFinderAPIJson {
     String attributes;
     String contact;
     String published_at;
+    String total_pages;
 
-    public Animal(String name, String gender, String size, String age, String distance, String type, String colors, String breeds, String description, String primary_photo_cropped, String attributes, String contact, String published_at) {
+    public Animal(String name, String gender, String size, String age, String distance, String type, String colors, String breeds, String description, String primary_photo_cropped, String attributes, String contact, String published_at,String total_pages) {
         this.name = name;
         this.gender = gender;
         this.size = size;
@@ -48,6 +50,15 @@ public class Animal extends PetFinderAPIJson {
         this.attributes = attributes;
         this.contact = contact;
         this.published_at = published_at;
+        this.total_pages = total_pages;
+    }
+
+    public String getTotal_pages() {
+        return total_pages;
+    }
+
+    public void setTotal_pages(String total_pages) {
+        this.total_pages = total_pages;
     }
 
     public String getName() {
@@ -191,7 +202,7 @@ public class Animal extends PetFinderAPIJson {
         int i = 0;
         int j = 1;
         int k = 0;
-        Animal animal = new Animal("","","","","","","","","","","","","");
+        Animal animal = new Animal("","","","","","","","","","","","","","");
 
         if (animalSubString.contains("gender")) {
             k = animalSubString.indexOf("gender") + 8;
@@ -346,7 +357,20 @@ public class Animal extends PetFinderAPIJson {
             }
             //System.out.println("publised_at of animal: " + s);
             animal.setPublished_at(s);
-        }
+        }            
+            String s = "";
+            if (animalSubString.contains("total_pages")) {
+                k = animalSubString.indexOf("total_pages") + 13;                
+
+                while (animalSubString.charAt(k) != 44) {
+                    s = s + animalSubString.charAt(k);
+                    k++;
+                }
+                //System.out.println("total_pages of animal: " + s);
+                animal.setTotal_pages(s);
+            }
+            
+          
         return animal;
 
     }

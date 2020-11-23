@@ -18,13 +18,13 @@ import org.json.JSONException;
  * @author David Bowles
  */
 public class PetFinderAPIController {
-    public static ArrayList<String> callAPI(String id) throws SQLException, IOException, JSONException{
+    public static String callAPI(String id) throws SQLException, IOException, JSONException{
          HashMap<String,String> map;
-         map = DBtoAPI(id);
-         ArrayList<String> animalList = new ArrayList<String>();
-         animalList = mapApiCall(map);
+         String s = DBtoAPI(id);
+        
+         String s1 = mapApiCall(s);
          //String url = "https://api.petfinder.com/v2/animals?" + DBtoAPIController.DBtoAPI(id);
          //String apiString = apiCall(url);  
-         return animalList;
+         return s1;
     }
 }

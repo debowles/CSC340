@@ -39,37 +39,38 @@ public class SignUpDBPetFinderParcer {
 
     
     //parces the data from the dataabse to fit the api
-    public static HashMap<String, String> animalPropertiesParced(HashMap<String, String> parameters) {
+    public static String animalPropertiesParced(HashMap<String, String> parameters) {
         HashMap<String,String> parcedMap = new HashMap<String,String>();
         String parsedString = "";
         String parametersString = parameters.toString();
+        parsedString = parsedString + zipCodeParced(parameters)+radiusParced(parameters);
         if (parametersString.contains("Dog")) {
-            parcedMap.put("Dog_URL",zipCodeParced(parameters)+radiusParced(parameters)+ "?type=" + "Dog&" + dogPropertiesParced(parameters)); //ADD PREFERENCES ON TOP OF THIS ? TO SEPERATE ANIMALTYPE
+            parsedString = parsedString + "?type=" + "Dog&" + dogPropertiesParced(parameters); //ADD PREFERENCES ON TOP OF THIS ? TO SEPERATE ANIMALTYPE
         }
         if (parametersString.contains("Cat")) {
-            parcedMap.put("Cat_URL",zipCodeParced(parameters)+radiusParced(parameters)+ "?type=" + "Cat&" + catPropertiesParced(parameters));
+            parsedString = parsedString + "?type=" + "Cat&" + catPropertiesParced(parameters);
         }
         if (parametersString.contains("Rabbit")) {
-            parcedMap.put("Rabbit_URL",zipCodeParced(parameters)+radiusParced(parameters)+ "?type=" + "Rabbit&" + rabbitPropertiesParced(parameters));
+            parsedString = parsedString + "?type=" + "Rabbit&" + rabbitPropertiesParced(parameters);
         }
         if (parametersString.contains("Bird")) {
-            parcedMap.put("Bird_URL",zipCodeParced(parameters)+radiusParced(parameters)+ "?type=" + "Bird&" + birdPropertiesParced(parameters));
+            parsedString = parsedString + "?type=" + "Bird&" + birdPropertiesParced(parameters);
         }
         if (parametersString.contains("Scales, Fins & Other")) {
-            parcedMap.put("Scales_URL",zipCodeParced(parameters)+radiusParced(parameters)+ "?type=" + "Scales, Fins & Other&" + scalePropertiesParced(parameters));
+            parsedString = parsedString + "?type=" + "Scales, Fins & Other&" + scalePropertiesParced(parameters);
         }
         if (parametersString.contains("Small & Furry")) {
-            parcedMap.put("SmallF_URL",zipCodeParced(parameters)+radiusParced(parameters)+ "?type=" + "Small & Furry&" + smallFPropertiesParced(parameters));
+            parsedString = parsedString + "?type=" + "Small & Furry&" + smallFPropertiesParced(parameters);
         }
         if (parametersString.contains("Horse")) {
-            parcedMap.put("Horse_URL",zipCodeParced(parameters)+radiusParced(parameters)+ "?type=" + "Horse&" + horsePropertiesParced(parameters));
+            parsedString = parsedString + "?type=" + "Horse&" + horsePropertiesParced(parameters);
         }
         if (parametersString.contains("Barnyard")) {
-            parcedMap.put("Barnyard_URL",zipCodeParced(parameters)+radiusParced(parameters)+ "?type=" + "Barnyard&" + barnyardPropertiesParced(parameters));
+            parsedString = parsedString + "?type=" + "Barnyard&" + barnyardPropertiesParced(parameters);
         }
 
-        System.out.println(parcedMap.toString());
-        return parcedMap;
+        System.out.println(parsedString);
+        return parsedString;
 
     }
 
