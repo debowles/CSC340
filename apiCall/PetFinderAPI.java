@@ -3,93 +3,68 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package apiCall;
-import PetfinderEnum.PetFinderEnum;
-import java.io.BufferedReader;
+package CSC340.apiCall;
+
+import static CSC340.apiCall.PetFinderAPIConnector.apiCall;
+import static CSC340.apiCall.PetFinderAPIConnector.getToken;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.json.JSONException;
-import org.json.JSONObject;
+
 /**
  *
- * @author DJ Bowles
+ * @author David Bowles
  */
-public class PetFinderAPI{
-          
-    
-    //grabs token for OAuth2.0
-    public static String getToken() {
-        HttpClient httpclient = new DefaultHttpClient();
-        HttpPost httppost = new HttpPost("https://api.petfinder.com/v2/oauth2/token");
-        String token = "";
-        String clientID = "Zd59vsTWRs3lDnXER0z7tzIfV781lN5DyT7k4IFKqHF8WNS1PR";
-        String clientSecret = "lWNEFV2h9b4QU6fqkBZV1rqtfoMC7jVPWnwsUgeg";
+public class PetFinderAPI implements PetFinderAPIInterface {
 
-        try {
-            
-            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("grant_type", "client_credentials"));
-            nameValuePairs.add(new BasicNameValuePair("client_id", clientID));
-            nameValuePairs.add(new BasicNameValuePair("client_secret", clientSecret));
-            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
-            //HTTP Request
-            HttpResponse response = httpclient.execute(httppost);
-
-            //JSON to string
-            JSONObject json_auth = new JSONObject(EntityUtils.toString(response.getEntity()));
-            token = json_auth.getString("access_token");
-            //System.out.println(token);
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return token;
+    //adds a parameter and value to the url
+    public String addParameter(String apiUrl,String parameter, String value) {
+        String urlString = apiUrl;
+        urlString = urlString + "&" + parameter + "=" + value;
+        apiUrl = urlString;
+        return apiUrl;
     }
-    
-    
-    
-    
-    //calls teh api then returns it as a string
-     public static String apiCall(ApiUrl apiUrl)throws IOException{
-        String urlString = apiUrl.getApiUrl();               
-        String token = getToken();
-        URL url = new URL(urlString);
-         
-         HttpURLConnection connection = (HttpURLConnection) url.openConnection();              
-        connection.setRequestProperty("Authorization", "Bearer " + token);
-        connection.setRequestProperty("Content-Type", "application/json");
-        connection.setRequestMethod("GET");
 
-        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        String output;
+    //deletes the parameter and value out of the url
+    @Override
+    public String deleteParameter(String apiUrl,String parameter, String value) {
+        String urlString = apiUrl;
+        String remove = "&" + parameter + "=" + value;
+        String replace = urlString.replace(remove, "");
+        apiUrl = replace;
+        return apiUrl;
+    }
 
-        StringBuffer apiResponse = new StringBuffer();
-        while ((output = in.readLine()) != null) {
-            apiResponse.append(output);
-            //System.out.println(apiResponse);
+    //cahnges a value for a specific parameter
+    @Override
+    public String changeValue(String apiUrl, String parameter, String value1, String value2) {
+        String urlString = apiUrl;
+        String replace = urlString.replace(value1, value2);
+        apiUrl = replace;
+        return apiUrl;
+    }
+
+    public String loadAPI(String apiUrl) throws IOException, JSONException{
+        String s;
+        s = apiCall(getToken(),apiUrl);
+        return s;   
+    }
+
+    public Boolean conatinsParameter(String apiUrl, String parameter) {
+        if (parameter.contains(apiUrl)) {
+            return true;
+        } else {
+            return false;
         }
-
-        in.close();
         
-        
-        
-        return apiResponse.toString();
-     }
+    //public void addPetType(String value){
+      //  if(value=="Rabbit"||value=="Bird"||value=="Dog"||value=="Cat"||value=="Small & Furry"||value=="Horse"||value=="Barnyard"){
+     //       addParameter("types", value);
+     //   }
+     //   else{
+            
+     //   }
+    //}
+    }
 }

@@ -1,4 +1,4 @@
-package prototype;
+package CSC340.prototype;
 
 import java.io.BufferedReader;
 import java.io.IOException;
