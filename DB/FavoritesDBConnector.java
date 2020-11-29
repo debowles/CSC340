@@ -5,11 +5,13 @@
  */
 package CSC340.DB;
 
+import CSC340.APIParcer.Animal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -33,15 +35,16 @@ public class FavoritesDBConnector implements DBConnectorInterface {
     }
 
     //reads whole row
-    public static HashMap<String, String> readUserInfoDB(String id) throws SQLException {
+    public static HashMap<String,String> readUserInfoDB(String id) throws SQLException {
         HashMap<String, String> map = new HashMap<>();
         try (Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/logindb", "root", "root")) {
             Statement stmt = con.createStatement();
-            ResultSet results = stmt.executeQuery("SELECT * FROM FAVORITES");
-            int rowNum = Integer.parseInt(id);
-            for (int i = 0; i <= rowNum; i++) {
-                results.next();
-            }         
+            ResultSet results = stmt.executeQuery("SELECT * FROM FAVORITES WHERE ID="+id);
+//            int rowNum = Integer.parseInt(id);
+//            for (int i = 0; i <= rowNum; i++) {
+//                results.next();
+//            }         
+            results.next();
             map.put("NAME", results.getString("NAME"));            
             map.put("GENDER", results.getString("GENDER"));
             map.put("SIZE", results.getString("SIZE"));

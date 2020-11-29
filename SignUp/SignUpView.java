@@ -13,7 +13,7 @@ public class SignUpView extends JFrame {
 
     /* All the buttons, text fields, checkboxes, and labels created to display window */
     private JPanel panel = new JPanel();
-    private JFrame frame = new JFrame("Pet Matcher");
+    private JFrame frame = new JFrame("");
     private JLabel emailLabel = new JLabel("Email:");
     private JTextField email = new JTextField();
     private JLabel firstNameLabel = new JLabel("First Name:");
@@ -47,10 +47,11 @@ public class SignUpView extends JFrame {
 
     /* This constructor formats and displays the buttons, text fields, checkboxes, and labels */
     public SignUpView() {
-
-        this.setSize(560, 800);
+        
+        setTitle("Registration Form");
+        this.setSize(560, 790);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        frame.add(panel);
         panel.setLayout(null);
 
         emailLabel.setBounds(30, 03, 80, 25);

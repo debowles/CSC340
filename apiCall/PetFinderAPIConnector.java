@@ -81,56 +81,32 @@ public class PetFinderAPIConnector implements PetFinderAPIConnectorface {
      * @throws IOException
      * @throws org.json.JSONException
      */
-    public static ArrayList<String> mapApiCall(HashMap<String, String> map) throws IOException, JSONException {
+    public static String apiCall(String parameters) throws IOException, JSONException {
         String token = getToken();
         ArrayList<String> list = new ArrayList<String>();
         String url = "";
-        String animal = "";
-        if (map.containsKey("Dog_URL")) {
-            url = "https://api.petfinder.com/v2/animals?" + map.get("Dog_URL");
-            animal = apiCall(token, url);            
-            list.add(animal);            
-        }
-        if (map.containsKey("Cat_URL")) {
-            url = "https://api.petfinder.com/v2/animals?" + map.get("Cat_URL");
-            animal = apiCall(token, url);
-            list.add(animal);
-        }
-        if (map.containsKey("Rabbit_URL")) {
-            url = "https://api.petfinder.com/v2/animals?" + map.get("Rabbit_URL");
-            animal = apiCall(token, url);
-            list.add(animal);
-        }
-        if (map.containsKey("Bird_URL")) {
-            url = "https://api.petfinder.com/v2/animals?" + map.get("Bird_URL");
-            animal = apiCall(token, url);
-            list.add(animal);
-        }
-        if (map.containsKey("Scales_URL")) {
-            url = "https://api.petfinder.com/v2/animals?" + map.get("Scales_URL");
-            animal = apiCall(token, url);
-            list.add(animal);
-        }
-        if (map.containsKey("SmallF_URL")) {
-            url = "https://api.petfinder.com/v2/animals?" + map.get("SmallF_URL");
-            animal = apiCall(token, url);
-            list.add(animal);
-        }
-        if (map.containsKey("Horse_URL")) {
-            url = "https://api.petfinder.com/v2/animals?" + map.get("Horse_URL");
-            animal = apiCall(token, url);
-            list.add(animal);
-        }
-        if (map.containsKey("Barnyard_URL")) {
-            url = "https://api.petfinder.com/v2/animals?" + map.get("Barnyard_URL");
-            animal = apiCall(token, url);
-            list.add(animal);
-        }
-        System.out.println("List: " + list.toString());
-        return list;
+        String animalString = "";
+        
+            url = "https://api.petfinder.com/v2/animals?" + parameters;
+            animalString = runApi(token, url);                                               
+        //System.out.println("List: " + animalString);
+        return animalString;
     }
-
-    public static String apiCall(String token, String urlString) throws IOException, JSONException {
+    
+    public static String apiCallWithToken(String parameters, String token) throws IOException, JSONException{
+        //String token = getToken();
+        ArrayList<String> list = new ArrayList<String>();
+        String url = "";
+        String animalString = "";
+        
+            url = "https://api.petfinder.com/v2/animals?" + parameters;
+            System.out.println(url);
+            animalString = runApi(token, url);                                               
+        //System.out.println("List: " + animalString);
+        return animalString;
+    }
+    
+    public static String runApi(String token, String urlString) throws IOException, JSONException {
 
         URL url = new URL(urlString);
         Map<String, String> myMap = new HashMap<String, String>();

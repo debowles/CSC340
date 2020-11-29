@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package CSC340.ChangePreference.BirdPreferences;
+package CSC340.ChangePreference.CatPreferences;
 
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-//Author David Bowles
-
-public class BirdPreferencesView extends JFrame {
+public class CatPreferencesView extends JFrame {
 
     private JPanel panel = new JPanel();
     private JFrame frame = new JFrame("");
@@ -31,8 +29,8 @@ public class BirdPreferencesView extends JFrame {
     JButton cancelButton = new JButton("Cancel");
     JButton saveButton = new JButton("Save");
 
-    public BirdPreferencesView() {
-        setTitle("Bird Preferences");
+    public CatPreferencesView() {
+        setTitle("Cat Preferences");
         this.setSize(400, 400);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel);
@@ -133,5 +131,4 @@ public class BirdPreferencesView extends JFrame {
     void addCancelListiner(ActionListener _listenForCancelListener){
         cancelButton.addActionListener(_listenForCancelListener);
     }
-
 }

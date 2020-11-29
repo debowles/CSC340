@@ -5,9 +5,11 @@
  */
 package CSC340.DB;
 
+import CSC340.APIParcer.Animal;
 import static CSC340.DB.DBConnector.createID;
 import static CSC340.DB.SignUpDatabaseConnector.getID;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -15,11 +17,11 @@ import java.util.HashMap;
  * @author biscu
  */
 public class DBController {
-    public static String createUserDB(HashMap<String,String> signUp) throws SQLException{        
+    public static void createUserDB(HashMap<String,String> signUp) throws SQLException{        
         String id = createID();
         SignUpDatabaseConnector.addUserInfoDB(signUp, id);
         PropertiesDBConnector.addUserInfoDB(signUp, id);
-        return id;
+        
     }
     public static boolean loginUserDB(String username, String password) throws SQLException{
         return SignUpDatabaseConnector.DBLogIn(username,password);
@@ -27,9 +29,7 @@ public class DBController {
     
     public static String getIDController(String username) throws SQLException{
         System.out.println("getIDController");
-        return getID("EMAIL",username);
-        
-        
+        return getID("EMAIL",username);                
     }
     
     public static HashMap<String, String> getAllDBInfo(String id) throws SQLException{
@@ -38,4 +38,11 @@ public class DBController {
         map.putAll(propertiesMap);
         return map;
     }
+    
+    public static HashMap<String,String> getFavoritesList(String id) throws SQLException{
+        HashMap<String,String> list = FavoritesDBConnector.readUserInfoDB(id);
+        return list;
+    }
+    
+    
 }

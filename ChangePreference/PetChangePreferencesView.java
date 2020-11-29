@@ -7,9 +7,9 @@ public class PetChangePreferencesView extends JFrame {
 
     private JPanel panel = new JPanel();
     private JFrame frame = new JFrame("");
-    private JLabel zipCodeLabel = new JLabel("Zip Code:");
+    private JLabel zipCodeLabel = new JLabel("Update Zip Code:");
     private JTextField zipCode = new JTextField();
-    private JLabel radiusLabel = new JLabel("Search Distance:");
+    private JLabel radiusLabel = new JLabel(" Update Search Distance:");
     private JTextField searchDistance = new JTextField();
     private JLabel rangeLabel = new JLabel("Range from 100-500miles");
     private JCheckBox jCheckBoxDogs = new JCheckBox("Dogs");
@@ -33,18 +33,18 @@ public class PetChangePreferencesView extends JFrame {
     JButton saveButton = new JButton("Save");
 
     public PetChangePreferencesView() {
-
+        setTitle("Pet Change Preferences");
         this.setSize(500, 650);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel);
         panel.setLayout(null);
 
-        zipCodeLabel.setBounds(150, 30, 80, 25);
+        zipCodeLabel.setBounds(90, 30, 100, 25);
         panel.add(zipCodeLabel);
         zipCode.setBounds(210, 30, 90, 25);
         panel.add(zipCode);
 
-        radiusLabel.setBounds(105, 60, 100, 25);
+        radiusLabel.setBounds(60, 60, 150, 25);
         panel.add(radiusLabel);
         searchDistance.setBounds(210, 60, 90, 25);
         panel.add(searchDistance);
@@ -100,16 +100,16 @@ public class PetChangePreferencesView extends JFrame {
 
         this.add(panel);
     }
-    
-    
+
+
     public String getZipCode(){
         return zipCode.getText();
     }
-    
+
     public String getRadius() {
         return searchDistance.getText();
     }
-    
+
     public void setZipCode(String _zipCode) {
         this.zipCode.setText(_zipCode);
     }
@@ -117,27 +117,27 @@ public class PetChangePreferencesView extends JFrame {
     public void setRadius(String _searchDistance) {
         this.searchDistance.setText(_searchDistance);
     }
-    
+
     void addSaveListiner(ActionListener _listenForSaveListener){
         saveButton.addActionListener(_listenForSaveListener);
     }
-    
+
     void addCancelListiner(ActionListener _listenForCancelListener){
         cancelButton.addActionListener(_listenForCancelListener);
     }
-    
+
     void addDogCheckListener(ActionListener _listenForDogCheckListener){
         jCheckBoxDogs.addActionListener(_listenForDogCheckListener);
     }
-    
+
     void addCatCheckListener(ActionListener _listenForCatCheckListener){
         jCheckBoxCats.addActionListener(_listenForCatCheckListener);
     }
-    
+
     void addRabbitsCheckListener(ActionListener _listenForRabbitsCheckListener){
         jCheckBoxRabbits.addActionListener(_listenForRabbitsCheckListener);
     }
-    
+
     void addBirdsCheckListener(ActionListener _listenForBirdsCheckListener){
         jCheckBoxBirds.addActionListener(_listenForBirdsCheckListener);
     }
@@ -153,50 +153,50 @@ public class PetChangePreferencesView extends JFrame {
      void addBarnyardCheckListener(ActionListener _listenForBarnyardCheckListener){
         jCheckBoxBarnyard.addActionListener(_listenForBarnyardCheckListener);
     }
-    
-     
-     
-     
+
+
+
+
     void addDogParametersButtonListener(ActionListener _listenForDogParametersButton){
         dogParametersButton.addActionListener(_listenForDogParametersButton);
     }
-    
+
     void addCatParametersButtonListener(ActionListener _listenForCatParametersButton){
         catParametersButton.addActionListener(_listenForCatParametersButton);
     }
-    
+
     void addBirdsParametersButtonListener(ActionListener _listenForBirdsParametersButton){
         birdsParametersButton.addActionListener(_listenForBirdsParametersButton);
     }
-    
+
     void addScalesParametersButtonListener(ActionListener _listenForScalesParametersButton){
         scalesParametersButton.addActionListener(_listenForScalesParametersButton);
     }
-    
+
     void addRabbitParametersButtonListener(ActionListener _listenForRabbitParametersButton){
         rabbitParametersButton.addActionListener(_listenForRabbitParametersButton);
     }
-    
+
     void addSmallFParametersButtonListener(ActionListener _listenForSmallFParametersButton){
         smallAndFurryParametersButton.addActionListener(_listenForSmallFParametersButton);
     }
-    
+
     void addHorsesParametersButtonListener(ActionListener _listenForHorsesParametersButton){
         horsesParametersButton.addActionListener(_listenForHorsesParametersButton);
     }
-    
+
     void addBarnyardParametersButtonListener(ActionListener _listenForBarnyardParametersButton){
         barnyardParametersButton.addActionListener(_listenForBarnyardParametersButton);
     }
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
     void displayLoginUnsuccessful(String _message) {
         JOptionPane.showMessageDialog(this, _message);
     }
-    
-    
+
+
 }

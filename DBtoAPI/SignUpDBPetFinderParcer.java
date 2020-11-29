@@ -7,7 +7,9 @@ package CSC340.DBtoAPI;
 
 import static CSC340.DB.DBFactory.getAPIParameters;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  *
@@ -39,37 +41,111 @@ public class SignUpDBPetFinderParcer {
 
     
     //parces the data from the dataabse to fit the api
-    public static HashMap<String, String> animalPropertiesParced(HashMap<String, String> parameters) {
-        HashMap<String,String> parcedMap = new HashMap<String,String>();
+    
+    public static String animalPropertiesListToStringDog(ArrayList<String> animalList,String pageNum){
+        return animalList.get(0)+ "page="+pageNum;        
+    }
+    
+    public static String animalPropertiesListToStringCat(ArrayList<String> animalList,String pageNum){
+        int listSize = animalList.size();  
+        int i = 0;
+        while(!(animalList.get(i).contains("Cat"))){
+            i++;
+        }
+        return animalList.get(i)+ "page="+pageNum;
+    }    
+    public static String animalPropertiesListToStringRabbit(ArrayList<String> animalList,String pageNum){
+        int listSize = animalList.size();  
+        int i = 0;
+        while(!(animalList.get(i).contains("Rabbit"))){
+            i++;
+        }
+        return animalList.get(i)+ "page="+pageNum;       
+    }
+    public static String animalPropertiesListToStringBird(ArrayList<String> animalList,String pageNum){
+        int listSize = animalList.size();  
+        int i = 0;
+        while(!(animalList.get(i).contains("Bird"))){
+            i++;
+        }
+        return animalList.get(i)+ "page="+pageNum;        
+    }
+    public static String animalPropertiesListToStringScales(ArrayList<String> animalList,String pageNum){
+        int listSize = animalList.size();  
+        int i = 0;
+        while(!(animalList.get(i).contains("Scales, Fins & Other"))){
+            i++;
+        }
+        return animalList.get(i)+ "page="+pageNum;        
+    }
+    public static String animalPropertiesListToStringSmallF(ArrayList<String> animalList,String pageNum){
+        int listSize = animalList.size();  
+        int i = 0;
+        while(!(animalList.get(i).contains("Small & Furry"))){
+            i++;
+        }
+        return animalList.get(i)+ "page="+pageNum;        
+    }
+    public static String animalPropertiesListToStringHorse(ArrayList<String> animalList,String pageNum){
+        int listSize = animalList.size();  
+        int i = 0;
+        while(!(animalList.get(i).contains("Horse"))){
+            i++;
+        }
+        return animalList.get(i)+ "page="+pageNum;        
+    }
+    public static String animalPropertiesListToStringBarnyard(ArrayList<String> animalList,String pageNum){
+        int listSize = animalList.size();  
+        int i = 0;
+        while(!(animalList.get(i).contains("Barnyard"))){
+            i++;
+        }
+        return animalList.get(i)+ "page="+pageNum;        
+    }
+    public static String animalPropertiesListToString(ArrayList<String> animalList,String pageNum){
+        String animalProperties = "";
+        int listSize = animalList.size();
+        
+        Random rand = new Random(); 
+        animalProperties = animalList.get(rand.nextInt(listSize)) ; //"page="+pageNum;
+        System.out.println();
+        System.out.println(animalProperties);
+        return animalProperties;
+    }
+    
+    
+    public static ArrayList<String> animalPropertiesParced(HashMap<String, String> parameters) {
+        ArrayList<String> parcedArray = new ArrayList<String>();
         String parsedString = "";
         String parametersString = parameters.toString();
+        parsedString = parsedString + zipCodeParced(parameters)+radiusParced(parameters);
         if (parametersString.contains("Dog")) {
-            parcedMap.put("Dog_URL",zipCodeParced(parameters)+radiusParced(parameters)+ "?type=" + "Dog&" + dogPropertiesParced(parameters)); //ADD PREFERENCES ON TOP OF THIS ? TO SEPERATE ANIMALTYPE
+            parcedArray.add(parsedString + "type=" + "Dog&" + dogPropertiesParced(parameters)); //ADD PREFERENCES ON TOP OF THIS ? TO SEPERATE ANIMALTYPE
         }
         if (parametersString.contains("Cat")) {
-            parcedMap.put("Cat_URL",zipCodeParced(parameters)+radiusParced(parameters)+ "?type=" + "Cat&" + catPropertiesParced(parameters));
+            parcedArray.add(parsedString + "type=" + "Cat&" + catPropertiesParced(parameters));
         }
         if (parametersString.contains("Rabbit")) {
-            parcedMap.put("Rabbit_URL",zipCodeParced(parameters)+radiusParced(parameters)+ "?type=" + "Rabbit&" + rabbitPropertiesParced(parameters));
+            parcedArray.add(parsedString + "type=" + "Rabbit&" + rabbitPropertiesParced(parameters));
         }
         if (parametersString.contains("Bird")) {
-            parcedMap.put("Bird_URL",zipCodeParced(parameters)+radiusParced(parameters)+ "?type=" + "Bird&" + birdPropertiesParced(parameters));
+            parcedArray.add(parsedString + "type=" + "Bird&" + birdPropertiesParced(parameters));
         }
         if (parametersString.contains("Scales, Fins & Other")) {
-            parcedMap.put("Scales_URL",zipCodeParced(parameters)+radiusParced(parameters)+ "?type=" + "Scales, Fins & Other&" + scalePropertiesParced(parameters));
+            parcedArray.add(parsedString+ "type=" + "Scales, Fins & Other&" + scalePropertiesParced(parameters));
         }
         if (parametersString.contains("Small & Furry")) {
-            parcedMap.put("SmallF_URL",zipCodeParced(parameters)+radiusParced(parameters)+ "?type=" + "Small & Furry&" + smallFPropertiesParced(parameters));
+            parcedArray.add(parsedString + "type=" + "Small & Furry&" + smallFPropertiesParced(parameters));
         }
         if (parametersString.contains("Horse")) {
-            parcedMap.put("Horse_URL",zipCodeParced(parameters)+radiusParced(parameters)+ "?type=" + "Horse&" + horsePropertiesParced(parameters));
+            parcedArray.add(parsedString + "type=" + "Horse&" + horsePropertiesParced(parameters));
         }
         if (parametersString.contains("Barnyard")) {
-            parcedMap.put("Barnyard_URL",zipCodeParced(parameters)+radiusParced(parameters)+ "?type=" + "Barnyard&" + barnyardPropertiesParced(parameters));
+            parcedArray.add(parsedString + "type=" + "Barnyard&" + barnyardPropertiesParced(parameters));
         }
 
-        System.out.println(parcedMap.toString());
-        return parcedMap;
+        System.out.println(parcedArray.toString());
+        return parcedArray;
 
     }
 

@@ -5,15 +5,16 @@
  */
 package CSC340.ChangePreference;
 
+import static CSC340.APIParcer.Animal.callAnimal;
 import CSC340.ChangePreference.BirdPreferences.BirdPreferencesModel;
 import CSC340.ChangePreference.BirdPreferences.BirdPreferencesController;
 import CSC340.ChangePreference.BirdPreferences.BirdPreferencesView;
-import CSC340.ChangePreference.CatPreferances.CatPreferencesController;
-import CSC340.ChangePreference.CatPreferances.CatPreferencesModel;
-import CSC340.ChangePreference.CatPreferances.CatPreferencesView;
-import CSC340.ChangePreference.DogPreferances.DogPreferencesModel;
-import CSC340.ChangePreference.DogPreferances.DogPreferencesController;
-import CSC340.ChangePreference.DogPreferances.DogPreferencesView;
+import CSC340.ChangePreference.CatPreferences.CatPreferencesController;
+import CSC340.ChangePreference.CatPreferences.CatPreferencesModel;
+import CSC340.ChangePreference.CatPreferences.CatPreferencesView;
+import CSC340.ChangePreference.DogPreferences.DogPreferencesModel;
+import CSC340.ChangePreference.DogPreferences.DogPreferencesController;
+import CSC340.ChangePreference.DogPreferences.DogPreferencesView;
 import CSC340.ChangePreference.HorsesPreferences.HorsesPreferencesController;
 import CSC340.ChangePreference.HorsesPreferences.HorsesPreferencesView;
 import CSC340.ChangePreference.HorsesPreferences.HorsesPreferencesModel;
@@ -30,9 +31,15 @@ import CSC340.ChangePreference.BarnyardPreferences.BarnyardPreferencesView;
 import CSC340.ChangePreference.BarnyardPreferences.BarnyardPreferencesModel;
 import CSC340.ChangePreference.BarnyardPreferences.BarnyardPreferencesController;
 import CSC340.InteractionPage.InteractionPageController;
+import CSC340.InteractionPage.InteractionPageModel;
 import CSC340.InteractionPage.InteractionPageView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.json.JSONException;
 
 /**
  *
@@ -78,19 +85,28 @@ public class PetChangePreferencesController {
         return id;
     }
     
-    //TODO: Go to homepage
+    
     class cancelListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             theView.dispose();
                     InteractionPageView theView = new InteractionPageView();
-                    InteractionPageController theController= new InteractionPageController(theView, getId());
+                    InteractionPageModel theModel = new InteractionPageModel(theView);
+            try {
+                InteractionPageController theController= new InteractionPageController(theView,theModel, getId(), callAnimal(getId()));
+            } catch (SQLException ex) {
+                Logger.getLogger(PetChangePreferencesController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(PetChangePreferencesController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (JSONException ex) {
+                Logger.getLogger(PetChangePreferencesController.class.getName()).log(Level.SEVERE, null, ex);
+            }
                     theView.setVisible(true);
         }
     }
 
-    //TODO: Go to homepage
+    
     class saveListener implements ActionListener {
     @Override
         public void actionPerformed(ActionEvent e) {

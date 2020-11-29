@@ -5,11 +5,13 @@
  */
 package CSC340.DB;
 
+import static CSC340.DB.PropertiesDBConnector.readUserInfoDB;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -61,7 +63,37 @@ public class DBFactory {
         return s;
     }
 
-    
+    public static ArrayList<String> getAnimalTypeList(String id) throws SQLException{
+        HashMap<String,String> map = readUserInfoDB(id);
+        String parametersString = map.get("ANIMALTYPE");
+        ArrayList<String> list = new ArrayList<String>();
+        if (parametersString.contains("Dog")) {
+            list.add("Dog");
+        }
+        if (parametersString.contains("Cat")) {
+           list.add("Cat");
+        }
+        if (parametersString.contains("Rabbit")) {
+            list.add("Rabbit");
+        }
+        if (parametersString.contains("Bird")) {
+            list.add("Bird");
+        }
+        if (parametersString.contains("Scales, Fins & Other")) {
+            list.add("Scales, Fins & Other");
+        }
+        if (parametersString.contains("Small & Furry")) {
+            list.add("Small & Furry");
+        }
+        if (parametersString.contains("Horse")) {
+            list.add("Horse");
+        }
+        if (parametersString.contains("Barnyard")) {
+            list.add("Barnyard");
+        }
+        
+        return list;
+    }
     
     //gets the parameters for the api from the user in the database
     public static HashMap<String, String> getAPIParameters(int rowNum) throws SQLException {

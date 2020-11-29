@@ -39,7 +39,7 @@ public class PetChangePreferencesModel {
     }
     
     public void animalSelected(String _animal) {
-        animalType = animalType + _animal;
+        animalType = _animal + animalType;
     }
     
     //Checks for valid Zip

@@ -3,16 +3,23 @@ package CSC340.SignUp;
 /*
 * The purpose of this class to have the view and the model connect to the controller
 * which responds to buttons clicked from the user from the view.
-* Last updated: 11/10/2020
+* Last updated: 11/18/2020
 * Author: Yngrid Corrales
  */
+import static CSC340.APIParcer.Animal.callAnimal;
 import CSC340.InteractionPage.InteractionPageController;
+import CSC340.InteractionPage.InteractionPageModel;
 import CSC340.InteractionPage.InteractionPageView;
 import CSC340.LogIn.LoginController;
 import CSC340.LogIn.LoginModel;
 import java.awt.event.ActionEvent;
 import CSC340.LogIn.LoginView;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.json.JSONException;
 
 public class SignUpController {
 
@@ -45,6 +52,7 @@ public class SignUpController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            theView.dispose();
             LoginView theView = new LoginView();
             LoginModel theModel = new LoginModel(theView);
             LoginController theController = new LoginController(theView, theModel);
@@ -58,38 +66,49 @@ public class SignUpController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            /* The theView.getTypes() are the getter and setters that were created
-             * in the view class to get the user info
-             */
-
-            if (theModel.noMatch(theView.getPassword(), theView.getRePass())) {
-            }
-            if (theModel.emailExists(theView.getEmail())) {
-            } else if (theModel.emptyFirstName(theView.getFirstName())) {
-            } else if (theModel.emptyLastName(theView.getLastName())) {
-            } else if (theModel.emptyPhoneNo(theView.getPhoneNo())) {
-            } else if (theModel.emptyZip(theView.getZipCode())) {
-            } else if (theModel.emptyRadius(theView.getRadius())) {
-            } else if (theModel.emptyPass(theView.getPassword())) {
-            } else if (theModel.emptyRePass(theView.getRePass())) {
-            } else if (theModel.inValidZip(theView.getZipCode())) {
-            } else if (theModel.outOfBoundsRadius(theView.getRadius())) {
-            } else if (theModel.validEmail(theView.getEmail())) {
-            } else {
-                try {
-                    theModel.emailPhoneNo(theView.getEmail(), theView.getPhoneNo());
-                    theModel.firstAndLastName(theView.getFirstName(), theView.getLastName());
-                    theModel.passAndRePass(theView.getPassword(), theView.getRePass());
-                    theModel.zipCodeAndRadius(theView.getZipCode(), theView.getRadius());
-                    String id = theModel.addToDBandGetID();
-                    theView.dispose();
-                    InteractionPageView theView = new InteractionPageView();
-                    InteractionPageController theController= new InteractionPageController(theView, id);
-                    theView.setVisible(true);
-                } catch (Exception ex) {
-                    System.out.println("Error" + ex);
+            try {
+                /* The theView.getTypes() are the getter and setters that were created
+                * in the view class to get the user info
+                */
+                if (theModel.emptyFirstName(theView.getFirstName())) {
+                } else if (theModel.emptyLastName(theView.getLastName())) {
+                } else if (theModel.emptyPhoneNo(theView.getPhoneNo())) {
+                } else if (theModel.emptyZip(theView.getZipCode())) {
+                } else if (theModel.emptyRadius(theView.getRadius())) {
+                } else if (theModel.emptyPass(theView.getPassword())) {
+                } else if (theModel.emptyRePass(theView.getRePass())) {
+                } else if (theModel.emailExists(theView.getEmail())) {
+                } else if (theModel.inValidZip(theView.getZipCode())) {
+                } else if (theModel.outOfBoundsRadius(theView.getRadius())) {
+                } else if (theModel.validEmail(theView.getEmail())) {
+                } else if (theModel.noMatch(theView.getPassword(), theView.getRePass())) {
+                } else {
+                    try {
+                        theModel.emailPhoneNo(theView.getEmail(), theView.getPhoneNo());
+                        theModel.firstAndLastName(theView.getFirstName(), theView.getLastName());
+                        theModel.passAndRePass(theView.getPassword(), theView.getRePass());
+                        theModel.zipCodeAndRadius(theView.getZipCode(), theView.getRadius());
+                        theModel.addToDB();
+                        
+                    } catch (Exception ex) {
+                        System.out.println("Error" + ex);
+                    }
                 }
+
+                String id = theModel.getSignUpID(theView.getEmail());                
+                theView.dispose();
+                InteractionPageView theView = new InteractionPageView();
+                InteractionPageModel theModel = new InteractionPageModel(theView);
+                InteractionPageController theController = new InteractionPageController(theView,theModel, id, callAnimal(id));
+                theView.setVisible(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (JSONException ex) {
+                Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         }
     }
 
@@ -98,7 +117,7 @@ public class SignUpController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.exit(0);
+            theView.dispose();
         }
     }
 
@@ -108,14 +127,11 @@ public class SignUpController {
         @Override
         public void actionPerformed(ActionEvent e) {
             String dog = "Dog ";
-            try {
-                theModel.animalSelected(dog);
+            theModel.animalSelected(dog);
 
-            } catch (NullPointerException ex) {
-                System.out.println("Error" + ex);
-            }
         }
     }
+
 
     /* When the cats checkbox is clicked, excute the method in the model */
     class catListener implements ActionListener {
@@ -123,12 +139,8 @@ public class SignUpController {
         @Override
         public void actionPerformed(ActionEvent e) {
             String cat = "Cats ";
-            try {
-                theModel.animalSelected(cat);
+            theModel.animalSelected(cat);
 
-            } catch (Exception ex) {
-                System.out.println("Error" + ex);
-            }
         }
     }
 
@@ -138,13 +150,8 @@ public class SignUpController {
         @Override
         public void actionPerformed(ActionEvent e) {
             String rabbit = "Rabbit ";
-            try {
+            theModel.animalSelected(rabbit);
 
-                theModel.animalSelected(rabbit);
-
-            } catch (Exception ex) {
-                System.out.println("Error" + ex);
-            }
         }
     }
 
@@ -154,12 +161,8 @@ public class SignUpController {
         @Override
         public void actionPerformed(ActionEvent e) {
             String scales = "Scales, Fins & Other ";
-            try {
-                theModel.animalSelected(scales);
+            theModel.animalSelected(scales);
 
-            } catch (Exception ex) {
-                System.out.println("Error" + ex);
-            }
         }
     }
 
@@ -169,12 +172,8 @@ public class SignUpController {
         @Override
         public void actionPerformed(ActionEvent e) {
             String birds = "Bird ";
-            try {
-                theModel.animalSelected(birds);
+            theModel.animalSelected(birds);
 
-            } catch (Exception ex) {
-                System.out.println("Error" + ex);
-            }
         }
     }
 
@@ -184,12 +183,8 @@ public class SignUpController {
         @Override
         public void actionPerformed(ActionEvent e) {
             String smallF = "Small & Furry ";
-            try {
-                theModel.animalSelected(smallF);
+            theModel.animalSelected(smallF);
 
-            } catch (Exception ex) {
-                System.out.println("Error" + ex);
-            }
         }
     }
 
@@ -199,12 +194,8 @@ public class SignUpController {
         @Override
         public void actionPerformed(ActionEvent e) {
             String horse = "Horse ";
-            try {
-                theModel.animalSelected(horse);
+            theModel.animalSelected(horse);
 
-            } catch (Exception ex) {
-                System.out.println("Error" + ex);
-            }
         }
     }
 
@@ -214,12 +205,8 @@ public class SignUpController {
         @Override
         public void actionPerformed(ActionEvent e) {
             String barnyard = "Barnyard ";
-            try {
-                theModel.animalSelected(barnyard);
+            theModel.animalSelected(barnyard);
 
-            } catch (Exception ex) {
-                System.out.println("Error" + ex);
-            }
         }
     }
 }

@@ -79,51 +79,51 @@ public class BarnyardPreferencesView extends JFrame {
         this.add(panel);
 
     }
-    
+
     void addMaleListiner(ActionListener _listenForMaleListener){
         jCheckBoxMale.addActionListener(_listenForMaleListener);
     }
-    
+
     void addFemaleListiner(ActionListener _listenForFemaleListener){
         jCheckBoxFemale.addActionListener(_listenForFemaleListener);
     }
-    
+
     void addBabyListiner(ActionListener _listenForBabyListener){
         jCheckBoxBaby.addActionListener(_listenForBabyListener);
     }
-    
+
     void addYoungListiner(ActionListener _listenForYoungListener){
         jCheckBoxYoung.addActionListener(_listenForYoungListener);
     }
-    
+
     void addAdultListiner(ActionListener _listenForAdultListener){
         jCheckBoxAdult.addActionListener(_listenForAdultListener);
     }
-    
+
     void addSeniorListiner(ActionListener _listenForSeniorListener){
         jCheckBoxSenior.addActionListener(_listenForSeniorListener);
     }
-    
+
     void addSmallListiner(ActionListener _listenForSmallListener){
         jCheckBoxSmall.addActionListener(_listenForSmallListener);
     }
-    
+
     void addMediumListiner(ActionListener _listenForMediumListener){
         jCheckBoxMedium.addActionListener(_listenForMediumListener);
     }
-    
+
     void addLargeListiner(ActionListener _listenForLargeListener){
         jCheckBoxLarge.addActionListener(_listenForLargeListener);
     }
-    
+
     void addXLargeListiner(ActionListener _listenForXLargeListener){
         jCheckBoxXLarge.addActionListener(_listenForXLargeListener);
     }
-    
+
     void addSaveListiner(ActionListener _listenForSaveListener){
         saveButton.addActionListener(_listenForSaveListener);
     }
-    
+
     void addCancelListiner(ActionListener _listenForCancelListener){
         cancelButton.addActionListener(_listenForCancelListener);
     }
