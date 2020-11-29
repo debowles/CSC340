@@ -12,12 +12,14 @@ import static CSC340.APIParcer.Animal.formatAnimal;
 import CSC340.APIParcer.AnimalController;
 import static CSC340.APIParcer.AnimalController.callAnimalPage;
 import static CSC340.APIParcer.AnimalController.*;
+import CSC340.DB.DBController;
 import static CSC340.DB.DBFactory.getAnimalTypeList;
 import static CSC340.apiCall.PetFinderAPIController.callAPI;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -39,6 +41,14 @@ public class InteractionPageModel {
 
     ArrayList<String> animalTypes;
 
+    public Animal getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
+    }
+
     public ArrayList<String> getAnimalTypes() {
         return animalTypes;
     }
@@ -46,7 +56,7 @@ public class InteractionPageModel {
     public void setAnimalTypes(ArrayList<String> animalTypes) {
         this.animalTypes = animalTypes;
     }
-    
+    private InteractionPageController theController;
     private InteractionPageView theView;
     //private LoginController theController;
     public InteractionPageModel(InteractionPageView _theView) {
@@ -54,8 +64,9 @@ public class InteractionPageModel {
        // this.theController = _theController;
 
     }
-    public void addToDB(Animal animal,String id){
-        
+    public void addToDB(String id) throws SQLException{
+       HashMap<String,String> animalMap =  Animal.animalToHashMap(animal, id);
+       DBController.addToFavoritesDB(animalMap);
     }
     public void nextAnimal(String id, String token) throws SQLException, IOException, JSONException {
        //if(this.theController.yesListener().isPressed())
@@ -146,7 +157,7 @@ public class InteractionPageModel {
         }
         
         
-        
+        this.animal = animal;
         System.out.println("Animal Called in yes listener: " + animal.getName() );
         theView.setTypeInfo(animal.getType());
         theView.setStatusInfo(animal.getPublished_at());

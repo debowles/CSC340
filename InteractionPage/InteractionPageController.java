@@ -11,7 +11,9 @@ import CSC340.APIParcer.AnimalController;
 import CSC340.ChangePreference.PetChangePreferencesController;
 import CSC340.ChangePreference.PetChangePreferencesModel;
 import CSC340.ChangePreference.PetChangePreferencesView;
+import static CSC340.DB.DBController.getFavoritesAnimalList;
 import CSC340.PetHistory.PetHistoryController;
+import CSC340.PetHistory.PetHistoryModel;
 import CSC340.PetHistory.PetHistoryView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,6 +39,9 @@ public class InteractionPageController {
         this.id = _id;
         this.animal = _animal;
         
+        theModel.setAnimal(animal);
+        
+        
         theView.setTypeInfo(_animal.getType());
         theView.setStatusInfo(_animal.getPublished_at());
         theView.setBreedInfo(_animal.getBreeds());
@@ -59,6 +64,11 @@ public class InteractionPageController {
     public Animal getAnimal() {
         return animal;
     }
+
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
+    }
+    
 
     public String getId() {
         return id;
@@ -103,7 +113,7 @@ public class InteractionPageController {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                theModel.addToDB(animal, id);
+                theModel.addToDB(id);
                 theModel.nextAnimal(getId(),token);
             } catch (SQLException ex) {
                 Logger.getLogger(InteractionPageController.class.getName()).log(Level.SEVERE, null, ex);
@@ -141,10 +151,17 @@ public class InteractionPageController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-           theView.dispose();
+           
+            try {
+                theView.dispose();
            PetHistoryView  theView = new PetHistoryView();
-           PetHistoryController theController= new PetHistoryController(theView);
-           theView.setVisible(true);
+           PetHistoryModel theModel = new PetHistoryModel(theView);
+                PetHistoryController theController= new PetHistoryController(theView,theModel,getId(),getFavoritesAnimalList(getId()));
+                theView.setVisible(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(InteractionPageController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
         }
 
     }

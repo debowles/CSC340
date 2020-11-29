@@ -197,6 +197,12 @@ public class Animal {
             }
             //System.out.println("breeds of the animal: " + s);
             s = s.replaceAll("\"", "");
+            s = s.replaceAll("primary:", "");
+            s = s.replaceAll("secondary:null,", "");
+            s = s.replaceAll("mixed:false,", "");
+            s = s.replaceAll("mixed:true,", "mixed,");
+            s = s.replaceAll("unknown:false", "");
+            s = s.replaceAll("secondary:", " Secondary ");
             animal.setBreeds(s);
         }
 
@@ -231,7 +237,7 @@ public class Animal {
                 small = small.replaceAll("\"", "");
                 //small = small.replaceAll("\"", "");
                 animal.setPhoto(small);
-                System.out.println("small: "+small);
+                System.out.println("small: " + small);
             }
         }
         if (animalSubString.contains("attributes")) {
@@ -255,7 +261,7 @@ public class Animal {
                 s = s + animalSubString.charAt(k);
                 k++;
             }
-            //System.out.println("contact of the animal: " + s);
+            System.out.println("contact of the animal: " + s);
             s = s.replaceAll("\"", "");
             animal.setContact(s);
         }
@@ -274,11 +280,11 @@ public class Animal {
         String s = "";
         if (animalSubString.contains("total_pages")) {
             k = animalSubString.indexOf("total_pages");
-            s = animalSubString.substring(k, k+16);
-            
-           s = s.replaceAll("}", "");
-           s = s.replaceAll(",", "");
-            
+            s = animalSubString.substring(k, k + 16);
+
+            s = s.replaceAll("}", "");
+            s = s.replaceAll(",", "");
+
             s = s.replaceAll("total_pages\":", "");
             System.out.println("total_pages of animal: " + s);
             animal.setTotal_pages(s);
@@ -286,6 +292,44 @@ public class Animal {
         //animal.setTotal_pages(s);
         return animal;
 
+    }
+
+    public static HashMap<String, String> animalToHashMap(Animal animal, String id) {
+        HashMap<String, String> animalMap = new HashMap<String, String>();
+        animalMap.put("NAME", animal.getName());
+        animalMap.put("GENDER", animal.getGender());
+        animalMap.put("SIZE", animal.getSize());
+        animalMap.put("AGE", animal.getAge());
+        animalMap.put("DISTANCE", animal.getDistance());
+        animalMap.put("TYPE", animal.getType());
+        animalMap.put("COLORS", animal.getColors());
+        animalMap.put("BREEDS", animal.getBreeds());
+        animalMap.put("DESCRIPTION", animal.getDescription());
+        animalMap.put("PRIMARY_PHOTO_CROPPED", animal.getPhoto());
+        animalMap.put("ATTRIBUTES", animal.getAttributes());
+        animalMap.put("CONTACT", animal.getContact());
+        animalMap.put("PUBLISHED_AT", animal.getPublished_at());
+        animalMap.put("ID", id);
+
+        return animalMap;
+    }
+
+    public static Animal hashMapToAnimal(HashMap<String, String> animalMap) {
+        Animal animal = new Animal("", "", "", "", "", "", "", "", "", "", "", "", "", "");
+        animal.setName(animalMap.get("NAME"));
+        animal.setGender(animalMap.get("GENDER"));
+        animal.setSize(animalMap.get("SIZE"));
+        animal.setAge(animalMap.get("AGE"));
+        animal.setDistance(animalMap.get("DISTANCE"));
+        animal.setType(animalMap.get("TYPE"));
+        animal.setColors(animalMap.get("COLORS"));
+        animal.setBreeds(animalMap.get("BREEDS"));
+        animal.setDescription(animalMap.get("DESCRIPTION"));
+        animal.setPhoto(animalMap.get("PRIMARY_PHOTO_CROPPED"));
+        animal.setAttributes(animalMap.get("ATTRIBUTES"));
+        animal.setContact(animalMap.get("CONTACT"));
+        animal.setPublished_at(animalMap.get("PUBLISHED_AT"));               
+        return animal;
     }
 
     public String getTotal_pages() {

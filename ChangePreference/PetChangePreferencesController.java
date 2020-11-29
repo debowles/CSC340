@@ -33,6 +33,7 @@ import CSC340.ChangePreference.BarnyardPreferences.BarnyardPreferencesController
 import CSC340.InteractionPage.InteractionPageController;
 import CSC340.InteractionPage.InteractionPageModel;
 import CSC340.InteractionPage.InteractionPageView;
+import CSC340.PetHistory.PetHistoryController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -124,6 +125,20 @@ public class PetChangePreferencesController {
                     System.out.println("Error" + ex);
             }
                 
+                try {
+                    theView.dispose();
+                    InteractionPageView theView = new InteractionPageView();
+                    InteractionPageModel theModel = new InteractionPageModel(theView);
+                    InteractionPageController theController = new InteractionPageController(theView, theModel, getId(), callAnimal(getId()));
+                } catch (SQLException ex) {
+                    Logger.getLogger(PetChangePreferencesController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(PetChangePreferencesController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (JSONException ex) {
+                    Logger.getLogger(PetChangePreferencesController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+          
+                theView.setVisible(true);
         }
     }
     }
