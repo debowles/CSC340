@@ -16,64 +16,56 @@ import java.awt.event.ActionListener;
  * @author biscu
  */
 public class ScalesAndOtherPreferencesController {
-     private ScalesAndOtherPreferencesView theView;
+
+    private ScalesAndOtherPreferencesView theView;
     private ScalesAndOtherPreferencesModel theModel;
     private String id;
-    
+
     public ScalesAndOtherPreferencesController(ScalesAndOtherPreferencesView theView, ScalesAndOtherPreferencesModel theModel, String _id) {
         this.theView = theView;
         this.theModel = theModel;
         this.id = _id;
-        
+
         this.theView.addSaveListiner(new saveListener());
         this.theView.addCancelListiner(new cancelListener());
-        
+
         this.theView.addMaleListiner(new maleListener());
         this.theView.addFemaleListiner(new femaleListener());
-        
-        this.theView.addBabyListiner(new babyListener());
-        this.theView.addYoungListiner(new youngListener());
-        this.theView.addAdultListiner(new adultListener());
-        this.theView.addSeniorListiner(new seniorListener());
-        
-        this.theView.addSmallListiner(new smallListener());
-        this.theView.addMediumListiner(new mediumListener());
-        this.theView.addLargeListiner(new largeListener());
-        this.theView.addXLargeListiner(new xLargeListener());
-       
-        
-        
+
+//        this.theView.addBabyListiner(new babyListener());
+//        this.theView.addYoungListiner(new youngListener());
+//        this.theView.addAdultListiner(new adultListener());
+//        this.theView.addSeniorListiner(new seniorListener());
+//
+//        this.theView.addSmallListiner(new smallListener());
+//        this.theView.addMediumListiner(new mediumListener());
+//        this.theView.addLargeListiner(new largeListener());
+//        this.theView.addXLargeListiner(new xLargeListener());
+
         System.out.println("Activated Listeners");
     }
-    /*
-    class backListener implements ActionListener {
 
-        
-    
-    }
-*/
-    
+
     class saveListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             /* The theView.getTypes() are the getter and setters that were created
              * in the view class to get the user info
-             */          
-                try {                                                          
-                    theModel.addToDB(getId());
-                    theView.dispose();
-                    PetChangePreferencesView theView = new PetChangePreferencesView();
-                    PetChangePreferencesModel theModel = new PetChangePreferencesModel(theView);
-                    PetChangePreferencesController theController = new PetChangePreferencesController(theView, theModel,getId());
-                    theView.setVisible(true);
-                } catch (Exception ex) {
-                    System.out.println("Error" + ex);
-                }
+             */
+            try {
+                theModel.addToDB(getId());
+                theView.dispose();
+                PetChangePreferencesView theView = new PetChangePreferencesView();
+                PetChangePreferencesModel theModel = new PetChangePreferencesModel(theView);
+                PetChangePreferencesController theController = new PetChangePreferencesController(theView, theModel, getId());
+                theView.setVisible(true);
+            } catch (Exception ex) {
+                System.out.println("Error" + ex);
             }
         }
-    
-            
+    }
+
     class cancelListener implements ActionListener {
 
         @Override
@@ -81,12 +73,11 @@ public class ScalesAndOtherPreferencesController {
             theView.dispose();
             PetChangePreferencesView theView = new PetChangePreferencesView();
             PetChangePreferencesModel theModel = new PetChangePreferencesModel(theView);
-            PetChangePreferencesController theController = new PetChangePreferencesController(theView, theModel,getId());
+            PetChangePreferencesController theController = new PetChangePreferencesController(theView, theModel, getId());
             theView.setVisible(true);
         }
     }
-   
-    
+
     class maleListener implements ActionListener {
 
         @Override
@@ -100,7 +91,7 @@ public class ScalesAndOtherPreferencesController {
             }
         }
     }
-    
+
     class femaleListener implements ActionListener {
 
         @Override
@@ -114,7 +105,7 @@ public class ScalesAndOtherPreferencesController {
             }
         }
     }
-    
+
     class babyListener implements ActionListener {
 
         @Override
@@ -128,7 +119,7 @@ public class ScalesAndOtherPreferencesController {
             }
         }
     }
-    
+
     class youngListener implements ActionListener {
 
         @Override
@@ -142,7 +133,7 @@ public class ScalesAndOtherPreferencesController {
             }
         }
     }
-    
+
     class adultListener implements ActionListener {
 
         @Override
@@ -156,7 +147,7 @@ public class ScalesAndOtherPreferencesController {
             }
         }
     }
-    
+
     class seniorListener implements ActionListener {
 
         @Override
@@ -170,7 +161,7 @@ public class ScalesAndOtherPreferencesController {
             }
         }
     }
-    
+
     class smallListener implements ActionListener {
 
         @Override
@@ -184,7 +175,7 @@ public class ScalesAndOtherPreferencesController {
             }
         }
     }
-    
+
     class mediumListener implements ActionListener {
 
         @Override
@@ -198,6 +189,7 @@ public class ScalesAndOtherPreferencesController {
             }
         }
     }
+
     class largeListener implements ActionListener {
 
         @Override
@@ -211,6 +203,7 @@ public class ScalesAndOtherPreferencesController {
             }
         }
     }
+
     class xLargeListener implements ActionListener {
 
         @Override
@@ -224,6 +217,7 @@ public class ScalesAndOtherPreferencesController {
             }
         }
     }
+
     public String getId() {
         return id;
     }

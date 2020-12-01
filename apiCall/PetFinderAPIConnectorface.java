@@ -13,9 +13,12 @@ import org.json.JSONException;
  * @author David Bowles
  */
 public interface PetFinderAPIConnectorface {
+    
+    //get Token
     public static String getToken(){
   return null;  
 }
+    //get apiCall
     public static String apiCall(String urlString)throws IOException, JSONException{
     return null;
 }

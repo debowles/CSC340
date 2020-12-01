@@ -13,8 +13,9 @@ import java.sql.SQLException;
  * @author David Bowles
  */
 public class BirdPreferencesModel {
+
     String gender = "";
-    String age = "";  
+    String age = "";
     String size = "";
 
     private BirdPreferencesView theView;
@@ -22,21 +23,22 @@ public class BirdPreferencesModel {
     public BirdPreferencesModel(BirdPreferencesView _theView) {
         this.theView = _theView;
     }
+    //Adds info to DB
 
     public void addToDB(String id) throws SQLException {
-        String preferances = gender+","+age+","+size;
-        
-        //Figure out how to store current ID
-        PropertiesDBConnector.updateUserInfoDB("BIRD_PARAMETERS",preferances,id);
+        String preferances = gender + "," + age + "," + size;
+
+        PropertiesDBConnector.updateUserInfoDB("BIRD_PARAMETERS", preferances, id);
     }
 
-    public void genderSelected(String _gender){
+    public void genderSelected(String _gender) {
         gender = gender + _gender;
     }
+
     public void ageSelected(String _age) {
         age = age + _age;
     }
-    
+
     public void sizeSelected(String _size) {
         size = size + _size;
     }

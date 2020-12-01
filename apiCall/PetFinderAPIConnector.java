@@ -81,22 +81,32 @@ public class PetFinderAPIConnector implements PetFinderAPIConnectorface {
      * @throws IOException
      * @throws org.json.JSONException
      */
-    public static String mapApiCall(String s) throws IOException, JSONException {
+    public static String apiCall(String parameters) throws IOException, JSONException {
         String token = getToken();
         ArrayList<String> list = new ArrayList<String>();
         String url = "";
-        String animal = "";
+        String animalString = "";
         
-            url = "https://api.petfinder.com/v2/animals?" + s;
-            animal = apiCall(token, url);            
-                    
-        
-        
-        System.out.println("List: " + animal);
-        return animal;
+            url = "https://api.petfinder.com/v2/animals?" + parameters;
+            animalString = runApi(token, url);                                               
+        //System.out.println("List: " + animalString);
+        return animalString;
     }
-
-    public static String apiCall(String token, String urlString) throws IOException, JSONException {
+    
+    public static String apiCallWithToken(String parameters, String token) throws IOException, JSONException{
+        //String token = getToken();
+        ArrayList<String> list = new ArrayList<String>();
+        String url = "";
+        String animalString = "";
+        
+            url = "https://api.petfinder.com/v2/animals?" + parameters;
+            System.out.println(url);
+            animalString = runApi(token, url);                                               
+        //System.out.println("List: " + animalString);
+        return animalString;
+    }
+    
+    public static String runApi(String token, String urlString) throws IOException, JSONException {
 
         URL url = new URL(urlString);
         Map<String, String> myMap = new HashMap<String, String>();

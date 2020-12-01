@@ -18,6 +18,8 @@ import java.util.logging.Logger;
  *
  * @author David Bowles
  */
+
+//connects to the DB
 public class DBConnector {
     public static Connection connectdb() {
         Connection con = null;

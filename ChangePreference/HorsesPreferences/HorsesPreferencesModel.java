@@ -22,11 +22,11 @@ public class HorsesPreferencesModel {
     public HorsesPreferencesModel(HorsesPreferencesView _theView) {
         this.theView = _theView;
     }
-
+    //Adds info to DB
     public void addToDB(String id) throws SQLException {
         String preferances = gender+","+age+","+size;
         
-        //Figure out how to store current ID
+
         PropertiesDBConnector.updateUserInfoDB("HORSES_PARAMETERS",preferances,id);
     }
 

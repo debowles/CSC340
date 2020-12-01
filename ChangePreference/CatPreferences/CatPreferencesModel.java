@@ -3,23 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package CSC340.ChangePreference.SmallAndFurryPreferences;
+package CSC340.ChangePreference.CatPreferences;
 
 import CSC340.DB.PropertiesDBConnector;
 import java.sql.SQLException;
 
 /**
  *
- * @author biscu
+ * @author David Bowles
  */
-public class SmallAndFurryPreferencesModel {
-     String gender = "";
+public class CatPreferencesModel {
+    String gender = "";
     String age = "";  
     String size = "";
 
-    private SmallAndFurryPreferencesView theView;
+    private CatPreferencesView theView;
 
-    public SmallAndFurryPreferencesModel(SmallAndFurryPreferencesView _theView) {
+    public CatPreferencesModel(CatPreferencesView _theView) {
         this.theView = _theView;
     }
     //Adds info to DB
@@ -27,7 +27,7 @@ public class SmallAndFurryPreferencesModel {
         String preferances = gender+","+age+","+size;
         
 
-        PropertiesDBConnector.updateUserInfoDB("BARNYARD_PARAMETERS",preferances,id);
+        PropertiesDBConnector.updateUserInfoDB("CAT_PARAMETERS",preferances,id);
     }
 
     public void genderSelected(String _gender){

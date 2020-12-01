@@ -27,15 +27,15 @@ public class BarnyardPreferencesController {
         this.theView.addMaleListiner(new maleListener());
         this.theView.addFemaleListiner(new femaleListener());
         
-        this.theView.addBabyListiner(new babyListener());
-        this.theView.addYoungListiner(new youngListener());
-        this.theView.addAdultListiner(new adultListener());
-        this.theView.addSeniorListiner(new seniorListener());
-        
-        this.theView.addSmallListiner(new smallListener());
-        this.theView.addMediumListiner(new mediumListener());
-        this.theView.addLargeListiner(new largeListener());
-        this.theView.addXLargeListiner(new xLargeListener());
+//        this.theView.addBabyListiner(new babyListener());
+//        this.theView.addYoungListiner(new youngListener());
+//        this.theView.addAdultListiner(new adultListener());
+//        this.theView.addSeniorListiner(new seniorListener());
+//        
+//        this.theView.addSmallListiner(new smallListener());
+//        this.theView.addMediumListiner(new mediumListener());
+//        this.theView.addLargeListiner(new largeListener());
+//        this.theView.addXLargeListiner(new xLargeListener());
        
         
         

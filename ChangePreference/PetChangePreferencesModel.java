@@ -25,8 +25,7 @@ public class PetChangePreferencesModel {
     }
     
     //Adds info to DB when user clicks Save
-    public void addToDB(String id) throws SQLException {
-    //TODO: find a way to save ID
+    public void addToDB(String id) throws SQLException {    
     PropertiesDBConnector.updateUserInfoDB("ANIMALTYPE", animalType, id);     
     SignUpDatabaseConnector.updateUserInfoDB("ZIPCODE", zipCode, id);
     SignUpDatabaseConnector.updateUserInfoDB("RADIUS", searchDistance, id);
@@ -39,7 +38,7 @@ public class PetChangePreferencesModel {
     }
     
     public void animalSelected(String _animal) {
-        animalType = animalType + _animal;
+        animalType = _animal + animalType;
     }
     
     //Checks for valid Zip

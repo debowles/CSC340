@@ -3,7 +3,7 @@ package CSC340.SignUp;
 /*
 * The purpose of this class to display messages and create the view for our
 * sign up form.
-* Last updated: 11/10/2020
+* Last updated: 11/28/2020
 * Author: Yngrid Corrales
  */
 import java.awt.event.ActionListener;
@@ -13,7 +13,7 @@ public class SignUpView extends JFrame {
 
     /* All the buttons, text fields, checkboxes, and labels created to display window */
     private JPanel panel = new JPanel();
-    private JFrame frame = new JFrame("Pet Matcher");
+    private JFrame frame = new JFrame("");
     private JLabel emailLabel = new JLabel("Email:");
     private JTextField email = new JTextField();
     private JLabel firstNameLabel = new JLabel("First Name:");
@@ -48,9 +48,10 @@ public class SignUpView extends JFrame {
     /* This constructor formats and displays the buttons, text fields, checkboxes, and labels */
     public SignUpView() {
 
-        this.setSize(560, 800);
+        setTitle("Registration Form");
+        this.setSize(560, 790);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        frame.add(panel);
         panel.setLayout(null);
 
         emailLabel.setBounds(30, 03, 80, 25);
@@ -135,62 +136,62 @@ public class SignUpView extends JFrame {
         this.add(panel);
     }
 
-    /* If barnyard checkbox is clicked execute a method in the controller named actionPerformed */
+    /* If barnyard checkbox is clicked execute a method in the controller named actionPerformed under barnyardListener */
     void addBarnyardListener(ActionListener _listenForBarnyardButton) {
         jCheckBoxBarnyard.addActionListener(_listenForBarnyardButton);
     }
 
-    /* If horse checkbox is clicked execute a method in the controller named actionPerformed */
+    /* If horse checkbox is clicked execute a method in the controller named actionPerformed under horsesListener */
     void addHorsesListener(ActionListener _listenForHorsesButton) {
         jCheckBoxHorses.addActionListener(_listenForHorsesButton);
     }
 
-    /* If Scales, Fins & Other check box is clicked execute a method in the controller named actionPerformed */
+    /* If Scales, Fins & Other check box is clicked execute a method in the controller named actionPerformed under scalesListener */
     void addScalesListener(ActionListener _listenForScalesButton) {
         jCheckBoxScales.addActionListener(_listenForScalesButton);
     }
 
-    /* If birds checkbox is clicked execute a method in the controller named actionPerformed */
+    /* If birds checkbox is clicked execute a method in the controller named actionPerformed under birdListener */
     void addBirdsListener(ActionListener _listenForBirdsButton) {
         jCheckBoxBirds.addActionListener(_listenForBirdsButton);
     }
 
-    /* If rabbit checkbox is clicked execute a method in the controller named actionPerformed */
+    /* If rabbit checkbox is clicked execute a method in the controller named actionPerformed under rabbitListener */
     void addRabbitsListener(ActionListener _listenForRabbitsButton) {
         jCheckBoxRabbits.addActionListener(_listenForRabbitsButton);
     }
 
-    /* If cat checkbox is clicked execute a method in the controller named actionPerformed */
+    /* If cat checkbox is clicked execute a method in the controller named actionPerformed under catListener */
     void addCatListener(ActionListener _listenForCatButton) {
         jCheckBoxCats.addActionListener(_listenForCatButton);
     }
 
-    /* If dog checkbox is clicked execute a method in the controller named actionPerformed */
+    /* If dog checkbox is clicked execute a method in the controller named actionPerformed under dogListener */
     void addDogListener(ActionListener _listenForDogButton) {
         jCheckBoxDogs.addActionListener(_listenForDogButton);
     }
 
-    /* If small & furry checkbox is clicked execute a method in the controller named actionPerformed */
+    /* If small & furry checkbox is clicked execute a method in the controller named actionPerformed under smallListener */
     void addSmallFListener(ActionListener _listenForSmallFButton) {
         jCheckBoxSmallF.addActionListener(_listenForSmallFButton);
     }
 
-    /* If the sign up button is clicked execute a method in the controller named actionPerformed */
+    /* If the sign up button is clicked execute a method in the controller named actionPerformed under signUpListener */
     void addSignUpListener(ActionListener _listenForSignUpButton) {
         signUpButton.addActionListener(_listenForSignUpButton);
     }
 
-    /* If the back button is clicked execute a method in the controller named actionPerformed */
+    /* If the back button is clicked execute a method in the controller named actionPerformed under backListener */
     void addBackListener(ActionListener _listenForBackButton) {
         backButton.addActionListener(_listenForBackButton);
     }
 
-    /* If the cancel button is clicked execute a method in the controller named actionPerformed */
+    /* If the cancel button is clicked execute a method in the controller named actionPerformed under cancelListener */
     void addCancelListener(ActionListener _listenForCancelButton) {
         cancelButton.addActionListener(_listenForCancelButton);
     }
 
-    /* Opens a popup that contains the error message passed */
+    /* Opens a popup that contains the message passed through */
     void displayLoginSuccessful(String _message) {
         JOptionPane.showMessageDialog(this, _message);
 

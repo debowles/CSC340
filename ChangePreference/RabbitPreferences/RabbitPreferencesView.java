@@ -1,14 +1,14 @@
-package CSC340.ChangePreference.SmallAndFurryPreferences;
+package CSC340.ChangePreference.RabbitPreferences;
 
 /*
-* The purpose of this class to display the SmallAndFurryPreferences page
+* The purpose of this class to display the RabbitPreferences page
 * Last updated: 11/25/2020
 * Author: Yngrid Corrales & David Bowles
  */
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class SmallAndFurryPreferencesView extends JFrame {
+public class RabbitPreferencesView extends JFrame {
 
     /* All the buttons, text fields, checkboxes, and labels created to display window */
     private JPanel panel = new JPanel();
@@ -31,8 +31,8 @@ public class SmallAndFurryPreferencesView extends JFrame {
     JButton saveButton = new JButton("Save");
 
     /* This constructor formats and displays the buttons, text fields, checkboxes, and labels */
-    public SmallAndFurryPreferencesView() {
-        setTitle("Small and Furry Preferences");
+    public RabbitPreferencesView() {
+        setTitle("Rabbit Preferences");
         this.setSize(400, 400);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel);
@@ -97,7 +97,7 @@ public class SmallAndFurryPreferencesView extends JFrame {
         jCheckBoxFemale.addActionListener(_listenForFemaleListener);
     }
 
-//    /* If the baby checkbox is clicked execute a method in the controller named actionPerformed under babyListener */
+    /* If the baby checkbox is clicked execute a method in the controller named actionPerformed under babyListener */
 //    void addBabyListiner(ActionListener _listenForBabyListener) {
 //        jCheckBoxBaby.addActionListener(_listenForBabyListener);
 //    }

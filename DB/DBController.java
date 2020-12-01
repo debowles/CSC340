@@ -14,14 +14,14 @@ import java.util.HashMap;
 
 /**
  *
- * @author biscu
+ * @author David Bowles
  */
 public class DBController {
-    public static String createUserDB(HashMap<String,String> signUp) throws SQLException{        
+    public static void createUserDB(HashMap<String,String> signUp) throws SQLException{        
         String id = createID();
         SignUpDatabaseConnector.addUserInfoDB(signUp, id);
         PropertiesDBConnector.addUserInfoDB(signUp, id);
-        return id;
+        
     }
     public static boolean loginUserDB(String username, String password) throws SQLException{
         return SignUpDatabaseConnector.DBLogIn(username,password);
@@ -39,10 +39,18 @@ public class DBController {
         return map;
     }
     
-    public static ArrayList<Animal> getFavoritesList(String id){
-        ArrayList<Animal> list = readUserInfoDB(id);
-        return list;
+//    public static HashMap<String,String> getFavoritesList(String id) throws SQLException{
+//        HashMap<String,String> list = FavoritesDBConnector.readUserInfoDB(id);
+//        return list;
+//    }
+    
+    public static void addToFavoritesDB(HashMap<String,String> animalMap) throws SQLException{
+        FavoritesDBConnector.addUserInfoDB(animalMap);
     }
-    
-    
+
+    public static ArrayList<Animal> getFavoritesAnimalList(String id) throws SQLException {
+        ArrayList<Animal> animal = DBFactory.getAnimalList(id);
+        System.out.println("Animal List DB Controller: "+animal.toString());
+        return animal;
+    }
 }

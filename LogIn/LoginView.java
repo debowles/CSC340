@@ -24,8 +24,9 @@ public class LoginView extends JFrame {
 
     /* This constructor formats and displays the buttons, text fields, checkboxes, and labels */
     public LoginView() {
+        setTitle("Login");
         String myimgpath;
-        myimgpath = "C:\\Users\\biscu\\Desktop\\CSC340 Project\\Pet Matcher Prototype\\src\\CSC340\\Pet Matcher logo.png";
+        myimgpath = "C:\\Users\\biscu\\Downloads\\Pet_Matcher_logo.png";
         Icon myimgicon = new ImageIcon(myimgpath);
         pic.setIcon(myimgicon);
 

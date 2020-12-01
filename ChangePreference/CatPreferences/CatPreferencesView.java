@@ -1,16 +1,15 @@
-package CSC340.ChangePreference.SmallAndFurryPreferences;
-
 /*
-* The purpose of this class to display the SmallAndFurryPreferences page
-* Last updated: 11/25/2020
-* Author: Yngrid Corrales & David Bowles
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
+package CSC340.ChangePreference.CatPreferences;
+
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class SmallAndFurryPreferencesView extends JFrame {
+public class CatPreferencesView extends JFrame {
 
-    /* All the buttons, text fields, checkboxes, and labels created to display window */
     private JPanel panel = new JPanel();
     private JFrame frame = new JFrame("");
     private JLabel genderLabel = new JLabel("Gender:");
@@ -30,9 +29,8 @@ public class SmallAndFurryPreferencesView extends JFrame {
     JButton cancelButton = new JButton("Cancel");
     JButton saveButton = new JButton("Save");
 
-    /* This constructor formats and displays the buttons, text fields, checkboxes, and labels */
-    public SmallAndFurryPreferencesView() {
-        setTitle("Small and Furry Preferences");
+    public CatPreferencesView() {
+
         this.setSize(400, 400);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel);
@@ -87,62 +85,50 @@ public class SmallAndFurryPreferencesView extends JFrame {
 
     }
 
-    /* If the male checkbox is clicked execute a method in the controller named actionPerformed under maleListener */
     void addMaleListiner(ActionListener _listenForMaleListener) {
         jCheckBoxMale.addActionListener(_listenForMaleListener);
     }
 
-    /* If the female checkbox is clicked execute a method in the controller named actionPerformed under femaleListener */
     void addFemaleListiner(ActionListener _listenForFemaleListener) {
         jCheckBoxFemale.addActionListener(_listenForFemaleListener);
     }
 
-//    /* If the baby checkbox is clicked execute a method in the controller named actionPerformed under babyListener */
 //    void addBabyListiner(ActionListener _listenForBabyListener) {
 //        jCheckBoxBaby.addActionListener(_listenForBabyListener);
 //    }
 //
-//    /* If the young checkbox is clicked execute a method in the controller named actionPerformed under youngListener */
 //    void addYoungListiner(ActionListener _listenForYoungListener) {
 //        jCheckBoxYoung.addActionListener(_listenForYoungListener);
 //    }
 //
-//    /* If the adult checkbox is clicked execute a method in the controller named actionPerformed under adultListener */
 //    void addAdultListiner(ActionListener _listenForAdultListener) {
 //        jCheckBoxAdult.addActionListener(_listenForAdultListener);
 //    }
 //
-//    /* If the senior checkbox is clicked execute a method in the controller named actionPerformed under seniorListener */
 //    void addSeniorListiner(ActionListener _listenForSeniorListener) {
 //        jCheckBoxSenior.addActionListener(_listenForSeniorListener);
 //    }
 //
-//    /* If the small checkbox is clicked execute a method in the controller named actionPerformed under smallListener */
 //    void addSmallListiner(ActionListener _listenForSmallListener) {
 //        jCheckBoxSmall.addActionListener(_listenForSmallListener);
 //    }
 //
-//    /* If the medium checkbox is clicked execute a method in the controller named actionPerformed under mediumListener */
 //    void addMediumListiner(ActionListener _listenForMediumListener) {
 //        jCheckBoxMedium.addActionListener(_listenForMediumListener);
 //    }
 //
-//    /* If the large checkbox is clicked execute a method in the controller named actionPerformed under largeListener */
 //    void addLargeListiner(ActionListener _listenForLargeListener) {
 //        jCheckBoxLarge.addActionListener(_listenForLargeListener);
 //    }
 //
-//    /* If the xlarge checkbox is clicked execute a method in the controller named actionPerformed under xLargeListener */
 //    void addXLargeListiner(ActionListener _listenForXLargeListener) {
 //        jCheckBoxXLarge.addActionListener(_listenForXLargeListener);
 //    }
 
-    /* If the save button is clicked execute a method in the controller named actionPerformed under saveListener */
     void addSaveListiner(ActionListener _listenForSaveListener) {
         saveButton.addActionListener(_listenForSaveListener);
     }
 
-    /* If the cancel button is clicked execute a method in the controller named actionPerformed under cancelListener */
     void addCancelListiner(ActionListener _listenForCancelListener) {
         cancelButton.addActionListener(_listenForCancelListener);
     }

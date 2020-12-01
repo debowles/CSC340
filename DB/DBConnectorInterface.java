@@ -11,11 +11,11 @@ import java.util.Map;
 
 /**
  *
- * @author biscu
+ * @author David Bowles
  */
 public interface DBConnectorInterface {
    
-    
+    //reda one parameter
    public static String readUserParameters(String label, int rowNum) throws SQLException{
        return null;
    };
@@ -25,14 +25,15 @@ public interface DBConnectorInterface {
        return null;
    };
    
+   //updates userinfo
    public static void updateUserInfoDB(String label, String variable, String id) throws SQLException{
        
    };
-   
+   //deletes info
    public static void deleteUserInfoDB(int rowNum) throws SQLException{
        
    };
-   
+   //adds new user
    public static void addUserInfoDB(HashMap<String,String> map ) throws SQLException{
        
    };

@@ -22,11 +22,11 @@ public class ScalesAndOtherPreferencesModel {
     public ScalesAndOtherPreferencesModel(ScalesAndOtherPreferencesView _theView) {
         this.theView = _theView;
     }
-
+    //Adds info to DB
     public void addToDB(String id) throws SQLException {
         String preferances = gender+","+age+","+size;
         
-        //Figure out how to store current ID
+
         PropertiesDBConnector.updateUserInfoDB("SCALES_PARAMETERS",preferances,id);
     }
 

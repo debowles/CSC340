@@ -7,6 +7,7 @@ package CSC340.apiCall;
 
 import static CSC340.apiCall.PetFinderAPIConnector.apiCall;
 import static CSC340.apiCall.PetFinderAPIConnector.getToken;
+import static CSC340.apiCall.PetFinderAPIConnector.runApi;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,7 +48,7 @@ public class PetFinderAPI implements PetFinderAPIInterface {
 
     public String loadAPI(String apiUrl) throws IOException, JSONException{
         String s;
-        s = apiCall(getToken(),apiUrl);
+        s = runApi(getToken(),apiUrl);
         return s;   
     }
 

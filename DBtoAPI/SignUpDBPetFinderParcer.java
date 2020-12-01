@@ -7,70 +7,126 @@ package CSC340.DBtoAPI;
 
 import static CSC340.DB.DBFactory.getAPIParameters;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  *
  * @author David Bowles
  */
 public class SignUpDBPetFinderParcer {
-
-//    public static String parseParameters(HashMap<String, String> parameters) throws SQLException {
-//        //add getUserRow        
-//        String s = parameters.toString();
-//        String parsedString = "&";
-//        
-//        System.out.println(s);
-//               
-//        if (s.contains("ZIPCODE")) {
-//            parsedString  = parsedString + zipCodeParced(parameters);
-//        }
-//        if (s.contains("RADIUS")) {
-//            parsedString = parsedString + radiusParced(parameters);
-//        }
-//        //if(s.contains("PARAMETERS")){
-//       //     parsedString = parsedString + getAnimalProperties(parameters);
-//        //}
-//        if (s.contains("ANIMALTYPE")) {
-//           parsedString  = parsedString + animalPropertiesParced(parameters);
-//        }
-//        return parsedString;
-//    }
-
     
-    //parces the data from the dataabse to fit the api
-    public static String animalPropertiesParced(HashMap<String, String> parameters) {
-        HashMap<String,String> parcedMap = new HashMap<String,String>();
+    public static String animalPropertiesListToStringDog(ArrayList<String> animalList,String pageNum){
+        return animalList.get(0)+ "page="+pageNum;        
+    }
+    
+    public static String animalPropertiesListToStringCat(ArrayList<String> animalList,String pageNum){
+        int listSize = animalList.size();  
+        int i = 0;
+        while(!(animalList.get(i).contains("Cat"))){
+            i++;
+        }
+        return animalList.get(i)+ "page="+pageNum;
+    }    
+    public static String animalPropertiesListToStringRabbit(ArrayList<String> animalList,String pageNum){
+        int listSize = animalList.size();  
+        int i = 0;
+        while(!(animalList.get(i).contains("Rabbit"))){
+            i++;
+        }
+        return animalList.get(i)+ "page="+pageNum;       
+    }
+    public static String animalPropertiesListToStringBird(ArrayList<String> animalList,String pageNum){
+        int listSize = animalList.size();  
+        int i = 0;
+        while(!(animalList.get(i).contains("Bird"))){
+            i++;
+        }
+        return animalList.get(i)+ "page="+pageNum;        
+    }
+    public static String animalPropertiesListToStringScales(ArrayList<String> animalList,String pageNum){
+        int listSize = animalList.size();  
+        int i = 0;
+        while(!(animalList.get(i).contains("Scales, Fins & Other"))){
+            i++;
+        }
+        return animalList.get(i)+ "page="+pageNum;        
+    }
+    public static String animalPropertiesListToStringSmallF(ArrayList<String> animalList,String pageNum){
+        int listSize = animalList.size();  
+        int i = 0;
+        while(!(animalList.get(i).contains("Small & Furry"))){
+            i++;
+        }
+        return animalList.get(i)+ "page="+pageNum;        
+    }
+    public static String animalPropertiesListToStringHorse(ArrayList<String> animalList,String pageNum){
+        int listSize = animalList.size();  
+        int i = 0;
+        while(!(animalList.get(i).contains("Horse"))){
+            i++;
+        }
+        return animalList.get(i)+ "page="+pageNum;        
+    }
+    public static String animalPropertiesListToStringBarnyard(ArrayList<String> animalList,String pageNum){
+        int listSize = animalList.size();  
+        int i = 0;
+        while(!(animalList.get(i).contains("Barnyard"))){
+            i++;
+        }
+        return animalList.get(i)+ "page="+pageNum;        
+    }
+    public static String animalPropertiesListToString(ArrayList<String> animalList,String pageNum){
+        String animalProperties = "";
+        int listSize = animalList.size();
+        
+        Random rand = new Random(); 
+        animalProperties = animalList.get(rand.nextInt(listSize)) ; //"page="+pageNum;
+        System.out.println();
+        System.out.println(animalProperties);
+        return animalProperties;
+    }
+    
+    
+    public static ArrayList<String> animalPropertiesParced(HashMap<String, String> parameters) {
+        ArrayList<String> parcedArray = new ArrayList<String>();
         String parsedString = "";
+        System.out.println("animalPropertiesParced parameters.toString(): "+ parameters.toString());
         String parametersString = parameters.toString();
+        
         parsedString = parsedString + zipCodeParced(parameters)+radiusParced(parameters);
+        System.out.println("animalPropertiesParced parced string: " + parsedString);
         if (parametersString.contains("Dog")) {
-            parsedString = parsedString + "?type=" + "Dog&" + dogPropertiesParced(parameters); //ADD PREFERENCES ON TOP OF THIS ? TO SEPERATE ANIMALTYPE
+            System.out.println("animalPropertiesParced type dog called");
+            parcedArray.add(parsedString + "type=" + "Dog&" + dogPropertiesParced(parameters)); //ADD PREFERENCES ON TOP OF THIS ? TO SEPERATE ANIMALTYPE
         }
         if (parametersString.contains("Cat")) {
-            parsedString = parsedString + "?type=" + "Cat&" + catPropertiesParced(parameters);
+            System.out.println("animalPropertiesParced type cat called");
+            parcedArray.add(parsedString + "type=" + "Cat&" + catPropertiesParced(parameters));
+            System.out.println("catPropertiesParced type cat called: " + parsedString + "type=" + "Cat&" + catPropertiesParced(parameters) );
         }
         if (parametersString.contains("Rabbit")) {
-            parsedString = parsedString + "?type=" + "Rabbit&" + rabbitPropertiesParced(parameters);
+            parcedArray.add(parsedString + "type=" + "Rabbit&" + rabbitPropertiesParced(parameters));
         }
         if (parametersString.contains("Bird")) {
-            parsedString = parsedString + "?type=" + "Bird&" + birdPropertiesParced(parameters);
+            parcedArray.add(parsedString + "type=" + "Bird&" + birdPropertiesParced(parameters));
         }
         if (parametersString.contains("Scales, Fins & Other")) {
-            parsedString = parsedString + "?type=" + "Scales, Fins & Other&" + scalePropertiesParced(parameters);
+            parcedArray.add(parsedString+ "type=" + "Scales, Fins \\u0026 Other&" + scalePropertiesParced(parameters));
         }
         if (parametersString.contains("Small & Furry")) {
-            parsedString = parsedString + "?type=" + "Small & Furry&" + smallFPropertiesParced(parameters);
+            parcedArray.add(parsedString + "type=" + "Small\\u0026Furry&" + smallFPropertiesParced(parameters));
         }
         if (parametersString.contains("Horse")) {
-            parsedString = parsedString + "?type=" + "Horse&" + horsePropertiesParced(parameters);
+            parcedArray.add(parsedString + "type=" + "Horse&" + horsePropertiesParced(parameters));
         }
         if (parametersString.contains("Barnyard")) {
-            parsedString = parsedString + "?type=" + "Barnyard&" + barnyardPropertiesParced(parameters);
+            parcedArray.add(parsedString + "type=" + "Barnyard&" + barnyardPropertiesParced(parameters));
         }
-
-        System.out.println(parsedString);
-        return parsedString;
+        
+        System.out.println(parcedArray.toString());
+        return parcedArray;
 
     }
 
@@ -93,10 +149,13 @@ public class SignUpDBPetFinderParcer {
     }
     
     public static String dogPropertiesParced(HashMap<String, String> parameters){
+        System.out.println("dogProperties parced " + parameters.toString());
         String parsedString = "";
         String parametersString = "";
-        if(parameters.containsValue("DOG_PARAMETERS")){
-            parametersString = parameters.get("DOG_PARAMETERS"); 
+        System.out.println("dogPropertiesParced(HashMap<String, String> parameters: " + parameters.get("DOG_PARAMETERS"));
+        if(parameters.containsKey("DOG_PARAMETERS")){
+            parametersString =parametersString + parameters.get("DOG_PARAMETERS"); 
+            System.out.println("parametersString = parameters.get(\"DOG_PARAMETERS\");  "+ parametersString);
             
             //Gender
             if(parametersString.contains("Male")&&!(parametersString.contains("Female"))){
@@ -107,32 +166,32 @@ public class SignUpDBPetFinderParcer {
             }
             
             //Age
-            if(parametersString.contains("Baby")){
-                parsedString = parsedString + "Age=" + "Baby&";
-            }
-            if(parametersString.contains("Young")){
-                parsedString = parsedString + "Age=" + "Young&";
-            }
-            if(parametersString.contains("Adult")){
-                parsedString = parsedString + "Age=" + "Adult&";
-            }
-            if(parametersString.contains("Senior")){
-                parsedString = parsedString + "Age=" + "Senior&";
-            }
-            
-            //Size
-            if(parametersString.contains("Small")){
-                parsedString = parsedString + "Size=" + "Small&";
-            }
-            if(parametersString.contains("Medium")){
-                parsedString = parsedString + "Size=" + "Medium&";
-            }
-            if(parametersString.contains("Large")){
-                parsedString = parsedString + "Size=" + "Large&";
-            }
-            if(parametersString.contains("XLarge")){
-                parsedString = parsedString + "Size=" + "XLarge&";
-            }
+//            if(parametersString.contains("Baby")){
+//                parsedString = parsedString + "Age=" + "Baby&";
+//            }
+//            if(parametersString.contains("Young")){
+//                parsedString = parsedString + "Age=" + "Young&";
+//            }
+//            if(parametersString.contains("Adult")){
+//                parsedString = parsedString + "Age=" + "Adult&";
+//            }
+//            if(parametersString.contains("Senior")){
+//                parsedString = parsedString + "Age=" + "Senior&";
+//            }
+//            
+//            //Size
+//            if(parametersString.contains("Small")){
+//                parsedString = parsedString + "Size=" + "Small&";
+//            }
+//            if(parametersString.contains("Medium")){
+//                parsedString = parsedString + "Size=" + "Medium&";
+//            }
+//            if(parametersString.contains("Large")){
+//                parsedString = parsedString + "Size=" + "Large&";
+//            }
+//            if(parametersString.contains("XLarge")){
+//                parsedString = parsedString + "Size=" + "XLarge&";
+//            }
         }
         
         //TODO:Preferences Parcer
@@ -143,9 +202,9 @@ public class SignUpDBPetFinderParcer {
     public static String catPropertiesParced(HashMap<String, String> parameters){
         String parsedString = "";
         String parametersString = "";
-        if(parameters.containsValue("CAT_PARAMETERS")){
-            parametersString = parameters.get("CAT_PARAMETERS"); 
-            
+        if(parameters.containsKey("CAT_PARAMETERS")){
+            parametersString = parametersString + parameters.get("CAT_PARAMETERS"); 
+            System.out.println("Cat Parameters String " + parametersString);
             //Gender
             if(parametersString.contains("Male")&&!(parametersString.contains("Female"))){
                 parsedString = parsedString + "Gender=" + "Male&";
@@ -155,35 +214,37 @@ public class SignUpDBPetFinderParcer {
             }
             
             //Age
-            if(parametersString.contains("Baby")){
-                parsedString = parsedString + "Age=" + "Baby&";
-            }
-            if(parametersString.contains("Young")){
-                parsedString = parsedString + "Age=" + "Young&";
-            }
-            if(parametersString.contains("Adult")){
-                parsedString = parsedString + "Age=" + "Adult&";
-            }
-            if(parametersString.contains("Senior")){
-                parsedString = parsedString + "Age=" + "Senior&";
-            }
-            
-            //Size
-            if(parametersString.contains("Small")){
-                parsedString = parsedString + "Size=" + "Small&";
-            }
-            if(parametersString.contains("Medium")){
-                parsedString = parsedString + "Size=" + "Medium&";
-            }
-            if(parametersString.contains("Large")){
-                parsedString = parsedString + "Size=" + "Large&";
-            }
-            if(parametersString.contains("XLarge")){
-                parsedString = parsedString + "Size=" + "XLarge&";
-            }
+//            if(parametersString.contains("Baby")){
+//                parsedString = parsedString + "Age=" + "Baby&";
+//            }
+//            if(parametersString.contains("Young")){
+//                parsedString = parsedString + "Age=" + "Young&";
+//            }
+//            if(parametersString.contains("Adult")){
+//                parsedString = parsedString + "Age=" + "Adult&";
+//            }
+//            if(parametersString.contains("Senior")){
+//                parsedString = parsedString + "Age=" + "Senior&";
+//            }
+//            
+//            //Size
+//            if(parametersString.contains("Small")){
+//                parsedString = parsedString + "Size=" + "Small&";
+//            }
+//            if(parametersString.contains("Medium")){
+//                parsedString = parsedString + "Size=" + "Medium&";
+//            }
+//            if(parametersString.contains("Large")){
+//                parsedString = parsedString + "Size=" + "Large&";
+//            }
+//            if(parametersString.contains("XLarge")){
+//                parsedString = parsedString + "Size=" + "XLarge&";
+//            }
         }
         
         //TODO:Preferences Parcer
+        
+        System.out.println("catPropertiesParced: "+ parsedString);
         
         return parsedString;
     }
@@ -191,8 +252,8 @@ public class SignUpDBPetFinderParcer {
     public static String rabbitPropertiesParced(HashMap<String, String> parameters){
         String parsedString = "";
         String parametersString = "";
-        if(parameters.containsValue("RABBIT_PARAMETERS")){
-            parametersString = parameters.get("RABBIT_PARAMETERS"); 
+        if(parameters.containsKey("RABBIT_PARAMETERS")){
+            parametersString = parametersString + parameters.get("RABBIT_PARAMETERS"); 
             
             //Gender
             if(parametersString.contains("Male")&&!(parametersString.contains("Female"))){
@@ -203,32 +264,32 @@ public class SignUpDBPetFinderParcer {
             }
             
             //Age
-            if(parametersString.contains("Baby")){
-                parsedString = parsedString + "Age=" + "Baby&";
-            }
-            if(parametersString.contains("Young")){
-                parsedString = parsedString + "Age=" + "Young&";
-            }
-            if(parametersString.contains("Adult")){
-                parsedString = parsedString + "Age=" + "Adult&";
-            }
-            if(parametersString.contains("Senior")){
-                parsedString = parsedString + "Age=" + "Senior&";
-            }
-            
-            //Size
-            if(parametersString.contains("Small")){
-                parsedString = parsedString + "Size=" + "Small&";
-            }
-            if(parametersString.contains("Medium")){
-                parsedString = parsedString + "Size=" + "Medium&";
-            }
-            if(parametersString.contains("Large")){
-                parsedString = parsedString + "Size=" + "Large&";
-            }
-            if(parametersString.contains("XLarge")){
-                parsedString = parsedString + "Size=" + "XLarge&";
-            }
+//            if(parametersString.contains("Baby")){
+//                parsedString = parsedString + "Age=" + "Baby&";
+//            }
+//            if(parametersString.contains("Young")){
+//                parsedString = parsedString + "Age=" + "Young&";
+//            }
+//            if(parametersString.contains("Adult")){
+//                parsedString = parsedString + "Age=" + "Adult&";
+//            }
+//            if(parametersString.contains("Senior")){
+//                parsedString = parsedString + "Age=" + "Senior&";
+//            }
+//            
+//            //Size
+//            if(parametersString.contains("Small")){
+//                parsedString = parsedString + "Size=" + "Small&";
+//            }
+//            if(parametersString.contains("Medium")){
+//                parsedString = parsedString + "Size=" + "Medium&";
+//            }
+//            if(parametersString.contains("Large")){
+//                parsedString = parsedString + "Size=" + "Large&";
+//            }
+//            if(parametersString.contains("XLarge")){
+//                parsedString = parsedString + "Size=" + "XLarge&";
+//            }
         }
         
         //TODO:Preferences Parcer
@@ -239,8 +300,8 @@ public class SignUpDBPetFinderParcer {
     public static String birdPropertiesParced(HashMap<String, String> parameters){
         String parsedString = "";
         String parametersString = "";
-        if(parameters.containsValue("BIRD_PARAMETERS")){
-            parametersString = parameters.get("BIRD_PARAMETERS"); 
+        if(parameters.containsKey("BIRD_PARAMETERS")){
+            parametersString =parametersString +  parameters.get("BIRD_PARAMETERS"); 
             
             //Gender
             if(parametersString.contains("Male")&&!(parametersString.contains("Female"))){
@@ -251,32 +312,32 @@ public class SignUpDBPetFinderParcer {
             }
             
             //Age
-            if(parametersString.contains("Baby")){
-                parsedString = parsedString + "Age=" + "Baby&";
-            }
-            if(parametersString.contains("Young")){
-                parsedString = parsedString + "Age=" + "Young&";
-            }
-            if(parametersString.contains("Adult")){
-                parsedString = parsedString + "Age=" + "Adult&";
-            }
-            if(parametersString.contains("Senior")){
-                parsedString = parsedString + "Age=" + "Senior&";
-            }
-            
-            //Size
-            if(parametersString.contains("Small")){
-                parsedString = parsedString + "Size=" + "Small&";
-            }
-            if(parametersString.contains("Medium")){
-                parsedString = parsedString + "Size=" + "Medium&";
-            }
-            if(parametersString.contains("Large")){
-                parsedString = parsedString + "Size=" + "Large&";
-            }
-            if(parametersString.contains("XLarge")){
-                parsedString = parsedString + "Size=" + "XLarge&";
-            }
+//            if(parametersString.contains("Baby")){
+//                parsedString = parsedString + "Age=" + "Baby&";
+//            }
+//            if(parametersString.contains("Young")){
+//                parsedString = parsedString + "Age=" + "Young&";
+//            }
+//            if(parametersString.contains("Adult")){
+//                parsedString = parsedString + "Age=" + "Adult&";
+//            }
+//            if(parametersString.contains("Senior")){
+//                parsedString = parsedString + "Age=" + "Senior&";
+//            }
+//            
+//            //Size
+//            if(parametersString.contains("Small")){
+//                parsedString = parsedString + "Size=" + "Small&";
+//            }
+//            if(parametersString.contains("Medium")){
+//                parsedString = parsedString + "Size=" + "Medium&";
+//            }
+//            if(parametersString.contains("Large")){
+//                parsedString = parsedString + "Size=" + "Large&";
+//            }
+//            if(parametersString.contains("XLarge")){
+//                parsedString = parsedString + "Size=" + "XLarge&";
+//            }
         }
         
         //TODO:Preferences Parcer
@@ -287,8 +348,8 @@ public class SignUpDBPetFinderParcer {
     public static String scalePropertiesParced(HashMap<String, String> parameters){
         String parsedString = "";
         String parametersString = "";
-        if(parameters.containsValue("SCLAES_PARAMETERS")){
-            parametersString = parameters.get("SCLAES_PARAMETERS"); 
+        if(parameters.containsKey("SCLAES_PARAMETERS")){
+            parametersString = parametersString + parameters.get("SCLAES_PARAMETERS"); 
             
             //Gender
             if(parametersString.contains("Male")&&!(parametersString.contains("Female"))){
@@ -299,32 +360,32 @@ public class SignUpDBPetFinderParcer {
             }
             
             //Age
-            if(parametersString.contains("Baby")){
-                parsedString = parsedString + "Age=" + "Baby&";
-            }
-            if(parametersString.contains("Young")){
-                parsedString = parsedString + "Age=" + "Young&";
-            }
-            if(parametersString.contains("Adult")){
-                parsedString = parsedString + "Age=" + "Adult&";
-            }
-            if(parametersString.contains("Senior")){
-                parsedString = parsedString + "Age=" + "Senior&";
-            }
-            
-            //Size
-            if(parametersString.contains("Small")){
-                parsedString = parsedString + "Size=" + "Small&";
-            }
-            if(parametersString.contains("Medium")){
-                parsedString = parsedString + "Size=" + "Medium&";
-            }
-            if(parametersString.contains("Large")){
-                parsedString = parsedString + "Size=" + "Large&";
-            }
-            if(parametersString.contains("XLarge")){
-                parsedString = parsedString + "Size=" + "XLarge&";
-            }
+//            if(parametersString.contains("Baby")){
+//                parsedString = parsedString + "Age=" + "Baby&";
+//            }
+//            if(parametersString.contains("Young")){
+//                parsedString = parsedString + "Age=" + "Young&";
+//            }
+//            if(parametersString.contains("Adult")){
+//                parsedString = parsedString + "Age=" + "Adult&";
+//            }
+//            if(parametersString.contains("Senior")){
+//                parsedString = parsedString + "Age=" + "Senior&";
+//            }
+//            
+//            //Size
+//            if(parametersString.contains("Small")){
+//                parsedString = parsedString + "Size=" + "Small&";
+//            }
+//            if(parametersString.contains("Medium")){
+//                parsedString = parsedString + "Size=" + "Medium&";
+//            }
+//            if(parametersString.contains("Large")){
+//                parsedString = parsedString + "Size=" + "Large&";
+//            }
+//            if(parametersString.contains("XLarge")){
+//                parsedString = parsedString + "Size=" + "XLarge&";
+//            }
         }
         
         //TODO:Preferences Parcer
@@ -335,8 +396,8 @@ public class SignUpDBPetFinderParcer {
     public static String smallFPropertiesParced(HashMap<String, String> parameters){
         String parsedString = "";
         String parametersString = "";
-        if(parameters.containsValue("SMALLANDFURRY_PARAMETERS")){
-            parametersString = parameters.get("SMALLANDFURRY_PARAMETERS"); 
+        if(parameters.containsKey("SMALLANDFURRY_PARAMETERS")){
+            parametersString = parametersString + parameters.get("SMALLANDFURRY_PARAMETERS"); 
             
             //Gender
             if(parametersString.contains("Male")&&!(parametersString.contains("Female"))){
@@ -347,32 +408,32 @@ public class SignUpDBPetFinderParcer {
             }
             
             //Age
-            if(parametersString.contains("Baby")){
-                parsedString = parsedString + "Age=" + "Baby&";
-            }
-            if(parametersString.contains("Young")){
-                parsedString = parsedString + "Age=" + "Young&";
-            }
-            if(parametersString.contains("Adult")){
-                parsedString = parsedString + "Age=" + "Adult&";
-            }
-            if(parametersString.contains("Senior")){
-                parsedString = parsedString + "Age=" + "Senior&";
-            }
-            
-            //Size
-            if(parametersString.contains("Small")){
-                parsedString = parsedString + "Size=" + "Small&";
-            }
-            if(parametersString.contains("Medium")){
-                parsedString = parsedString + "Size=" + "Medium&";
-            }
-            if(parametersString.contains("Large")){
-                parsedString = parsedString + "Size=" + "Large&";
-            }
-            if(parametersString.contains("XLarge")){
-                parsedString = parsedString + "Size=" + "XLarge&";
-            }
+//            if(parametersString.contains("Baby")){
+//                parsedString = parsedString + "Age=" + "Baby&";
+//            }
+//            if(parametersString.contains("Young")){
+//                parsedString = parsedString + "Age=" + "Young&";
+//            }
+//            if(parametersString.contains("Adult")){
+//                parsedString = parsedString + "Age=" + "Adult&";
+//            }
+//            if(parametersString.contains("Senior")){
+//                parsedString = parsedString + "Age=" + "Senior&";
+//            }
+//            
+//            //Size
+//            if(parametersString.contains("Small")){
+//                parsedString = parsedString + "Size=" + "Small&";
+//            }
+//            if(parametersString.contains("Medium")){
+//                parsedString = parsedString + "Size=" + "Medium&";
+//            }
+//            if(parametersString.contains("Large")){
+//                parsedString = parsedString + "Size=" + "Large&";
+//            }
+//            if(parametersString.contains("XLarge")){
+//                parsedString = parsedString + "Size=" + "XLarge&";
+//            }
         }
         
         //TODO:Preferences Parcer
@@ -382,8 +443,8 @@ public class SignUpDBPetFinderParcer {
     public static String horsePropertiesParced(HashMap<String, String> parameters){
         String parsedString = "";
         String parametersString = "";
-        if(parameters.containsValue("HORSES_PARAMETERS")){
-            parametersString = parameters.get("HORSES_PARAMETERS"); 
+        if(parameters.containsKey("HORSES_PARAMETERS")){
+            parametersString = parametersString + parameters.get("HORSES_PARAMETERS"); 
             
             //Gender
             if(parametersString.contains("Male")&&!(parametersString.contains("Female"))){
@@ -394,32 +455,32 @@ public class SignUpDBPetFinderParcer {
             }
             
             //Age
-            if(parametersString.contains("Baby")){
-                parsedString = parsedString + "Age=" + "Baby&";
-            }
-            if(parametersString.contains("Young")){
-                parsedString = parsedString + "Age=" + "Young&";
-            }
-            if(parametersString.contains("Adult")){
-                parsedString = parsedString + "Age=" + "Adult&";
-            }
-            if(parametersString.contains("Senior")){
-                parsedString = parsedString + "Age=" + "Senior&";
-            }
-            
-            //Size
-            if(parametersString.contains("Small")){
-                parsedString = parsedString + "Size=" + "Small&";
-            }
-            if(parametersString.contains("Medium")){
-                parsedString = parsedString + "Size=" + "Medium&";
-            }
-            if(parametersString.contains("Large")){
-                parsedString = parsedString + "Size=" + "Large&";
-            }
-            if(parametersString.contains("XLarge")){
-                parsedString = parsedString + "Size=" + "XLarge&";
-            }
+//            if(parametersString.contains("Baby")){
+//                parsedString = parsedString + "Age=" + "Baby&";
+//            }
+//            if(parametersString.contains("Young")){
+//                parsedString = parsedString + "Age=" + "Young&";
+//            }
+//            if(parametersString.contains("Adult")){
+//                parsedString = parsedString + "Age=" + "Adult&";
+//            }
+//            if(parametersString.contains("Senior")){
+//                parsedString = parsedString + "Age=" + "Senior&";
+//            }
+//            
+//            //Size
+//            if(parametersString.contains("Small")){
+//                parsedString = parsedString + "Size=" + "Small&";
+//            }
+//            if(parametersString.contains("Medium")){
+//                parsedString = parsedString + "Size=" + "Medium&";
+//            }
+//            if(parametersString.contains("Large")){
+//                parsedString = parsedString + "Size=" + "Large&";
+//            }
+//            if(parametersString.contains("XLarge")){
+//                parsedString = parsedString + "Size=" + "XLarge&";
+//            }
         }
         
         //TODO:Preferences Parcer
@@ -430,8 +491,8 @@ public class SignUpDBPetFinderParcer {
     public static String barnyardPropertiesParced(HashMap<String, String> parameters){
         String parsedString = "";
         String parametersString = "";
-        if(parameters.containsValue("BARNYARD_PARAMETERS")){
-            parametersString = parameters.get("BARNYARD_PARAMETERS"); 
+        if(parameters.containsKey("BARNYARD_PARAMETERS")){
+            parametersString = parametersString +parameters.get("BARNYARD_PARAMETERS"); 
             
             //Gender
             if(parametersString.contains("Male")&&!(parametersString.contains("Female"))){
@@ -442,32 +503,32 @@ public class SignUpDBPetFinderParcer {
             }
             
             //Age
-            if(parametersString.contains("Baby")){
-                parsedString = parsedString + "Age=" + "Baby&";
-            }
-            if(parametersString.contains("Young")){
-                parsedString = parsedString + "Age=" + "Young&";
-            }
-            if(parametersString.contains("Adult")){
-                parsedString = parsedString + "Age=" + "Adult&";
-            }
-            if(parametersString.contains("Senior")){
-                parsedString = parsedString + "Age=" + "Senior&";
-            }
-            
-            //Size
-            if(parametersString.contains("Small")){
-                parsedString = parsedString + "Size=" + "Small&";
-            }
-            if(parametersString.contains("Medium")){
-                parsedString = parsedString + "Size=" + "Medium&";
-            }
-            if(parametersString.contains("Large")){
-                parsedString = parsedString + "Size=" + "Large&";
-            }
-            if(parametersString.contains("XLarge")){
-                parsedString = parsedString + "Size=" + "XLarge&";
-            }
+//            if(parametersString.contains("Baby")){
+//                parsedString = parsedString + "Age=" + "Baby&";
+//            }
+//            if(parametersString.contains("Young")){
+//                parsedString = parsedString + "Age=" + "Young&";
+//            }
+//            if(parametersString.contains("Adult")){
+//                parsedString = parsedString + "Age=" + "Adult&";
+//            }
+//            if(parametersString.contains("Senior")){
+//                parsedString = parsedString + "Age=" + "Senior&";
+//            }
+//            
+//            //Size
+//            if(parametersString.contains("Small")){
+//                parsedString = parsedString + "Size=" + "Small&";
+//            }
+//            if(parametersString.contains("Medium")){
+//                parsedString = parsedString + "Size=" + "Medium&";
+//            }
+//            if(parametersString.contains("Large")){
+//                parsedString = parsedString + "Size=" + "Large&";
+//            }
+//            if(parametersString.contains("XLarge")){
+//                parsedString = parsedString + "Size=" + "XLarge&";
+//            }
         }
         
         //TODO:Preferences Parcer

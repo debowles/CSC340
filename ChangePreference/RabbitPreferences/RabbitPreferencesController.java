@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package CSC340.ChangePreference.BirdPreferences;
+package CSC340.ChangePreference.RabbitPreferences;
 
 import CSC340.ChangePreference.PetChangePreferencesController;
 import CSC340.ChangePreference.PetChangePreferencesModel;
@@ -13,18 +13,17 @@ import java.awt.event.ActionListener;
 
 /**
  *
- * @author David Bowles
+ * @author biscu
  */
-public class BirdPreferencesController {
-        private BirdPreferencesView theView;
-    private BirdPreferencesModel theModel;
+public class RabbitPreferencesController {
+     private RabbitPreferencesView theView;
+    private RabbitPreferencesModel theModel;
     private String id;
     
-    public BirdPreferencesController(BirdPreferencesView theView, BirdPreferencesModel theModel,String _id) {
-        this.id = _id;
+    public RabbitPreferencesController(RabbitPreferencesView theView, RabbitPreferencesModel theModel, String _id) {
         this.theView = theView;
         this.theModel = theModel;
-        
+        this.id = _id;
         
         this.theView.addSaveListiner(new saveListener());
         this.theView.addCancelListiner(new cancelListener());

@@ -28,7 +28,6 @@ public class BarnyardPreferencesModel {
     public void addToDB(String id) throws SQLException {
         String preferances = gender+","+age+","+size;
         
-        //Figure out how to store current ID
         PropertiesDBConnector.updateUserInfoDB("BARNYARD_PARAMETERS",preferances,id);
     }
 
